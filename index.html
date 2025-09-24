@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Portfolio</title>
+  <meta name="description" content="Personal portfolio" />
+  <style>
+    /* --- CSS Reset (lightweight) --- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    img, picture, video, canvas, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; }
+
+    /* --- Design tokens --- */
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a; /* slate-900 */
+      --muted: #64748b; /* slate-500 */
+      --ring: #e5e7eb;  /* gray-200 */
+      --radius: 16px;
+      --nav-h: 64px;
+      --content-max: 820px; /* max width for the image container */
+      --shadow: 0 10px 25px rgba(0,0,0,.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0f19;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --ring: #1f2937;
+        --shadow: 0 10px 25px rgba(0,0,0,.35);
+      }
+    }
+
+    body { 
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* --- Top navigation --- */
+    .nav {
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky; /* stays at top on scroll */
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+    }
+    .nav-inner {
+      width: min(1100px, 92vw);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      font-size: 1.05rem;
+    }
+    .links { display: flex; gap: 22px; }
+    .links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      opacity: .85;
+    }
+    .links a[aria-current="page"], .links a:hover { opacity: 1; }
+
+    /* --- Main area with centered image --- */
+    main {
+      min-height: calc(100vh - var(--nav-h));
+      display: grid;
+      place-items: start center; /* center horizontally, start vertically */
+      padding: 6vh 0 10vh;
+    }
+    .frame {
+      width: min(var(--content-max), 92vw);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #000; /* helps avoid white flash around images */
+    }
+    .frame img { width: 100%; height: auto; display: block; }
+
+    /* --- Footer (optional) --- */
+    footer { 
+      padding: 48px 0; text-align: center; color: var(--muted);
+    }
+
+    /* --- (Future) Carousel scaffolding --- */
+    .carousel { position: relative; }
+    .carousel > .slide { display: block; }
+    /* If you add multiple slides later, you can switch to overflow-hidden and translateX for slides. */
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="nav" role="navigation" aria-label="Primary">
+    <div class="nav-inner">
+      <div class="brand" id="logo">Your Logo</div>
+      <nav class="links">
+        <a href="#work" aria-current="page">Work</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="frame carousel" id="work" aria-label="Featured image">
+      <!-- Replace hero.jpg with your own image path. Large, retina-ready image recommended. -->
+      <img src="hero.jpg" alt="Featured project preview" loading="eager" decoding="async">
+      <!-- (Later) Duplicate this <img> inside .carousel with class="slide" per image, then enhance with JS. -->
+    </section>
+  </main>
+
+  <footer>
+    © <span id="y"></span> Your Name
+  </footer>
+
+  <script>
+    // Simple year stamp
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Carousel placeholder: keeps code ready for later expansion
+    // Example API surface you can fill in later.
+    /*
+    const slides = Array.from(document.querySelectorAll('.carousel .slide'));
+    let i = 0;
+    function show(n){ slides.forEach((s,idx)=> s.style.display = idx===n ? 'block' : 'none'); }
+    setInterval(()=>{ i = (i+1) % slides.length; show(i); }, 4000);
+    show(0);
+    */
+  </script>
+</body>
+</html>
