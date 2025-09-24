@@ -304,15 +304,14 @@ p {
     }
     goTo(index, true);
   }
-  function stepBack() {
-    if (index === 0) {
-      goTo(N, false);
-      requestAnimationFrame(() => goTo(N - 1, true));
-    } else {
-      goTo(index - 1, true);
-      index -= 1;
-    }
+function stepBack() {
+  if (index === 0) {
+    // jump straight to last real slide, no animation → no blank frame
+    goTo(N - 1, false);
+  } else {
+    goTo(index - 1, true);
   }
+}
   function start(){ stop(); timer = setInterval(stepForward, STEP_MS); }
   function stop(){ if (timer) { clearInterval(timer); timer = null; } }
 
