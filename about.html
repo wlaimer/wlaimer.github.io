@@ -88,7 +88,7 @@ p {
   font-weight: normal;
 }
 
-	/* Intro section layout */
+/* Intro section (desktop default) */
 .intro {
   display: flex;
   gap: 40px;
@@ -99,34 +99,36 @@ p {
 }
 
 .intro img {
-  width: 250px;         /* your portrait size on desktop */
+  width: 250px;
   height: auto;
   border-radius: 6px;
 }
 
 .intro-text {
   flex: 1;
+  text-align: left;   /* desktop = left aligned */
+  margin: 0;          /* normal flow on desktop */
 }
-/* --- Mobile layout --- */
+
+/* --- Mobile layout only --- */
 @media (max-width: 768px) {
   .intro {
     flex-direction: column;   /* stack image + text */
-    align-items: center;      /* center content */
-    text-align: center;       /* center text */
+    align-items: center;      /* centers only the image */
     gap: 20px;
     margin: 20px auto;
   }
 
   .intro img {
-    width: 60%;               /* make portrait smaller and centered */
+    width: 60%;               /* portrait scales */
     max-width: 200px;
-	      margin: 0 auto;           /* centers the image */
+    margin: 0 auto;           /* center image horizontally */
   }
 
   .intro-text {
-    margin: 0 5%;
-    max-width: 90%;           /* keep nice readable width */
-    text-align: left;
+    margin: 0 5%;             /* space from screen edge */
+    max-width: 90%;
+    text-align: left;         /* stays left aligned */
   }
 }
 
