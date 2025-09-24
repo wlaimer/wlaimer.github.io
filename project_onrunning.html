@@ -19,7 +19,9 @@
     color: #000;
     margin: 0;
   }
-
+	html {
+ 	 overflow-y: scroll; /* always show vertical scrollbar */
+	}
   /* Navigation */
   .nav {
     height: 60px;
@@ -78,11 +80,6 @@
 </style>
 </head>
 <body>
-  html {
-  /* Always reserve space for the vertical scrollbar to avoid width jumps */
-  overflow-y: scroll;                 /* keeps the scrollbar even on short pages */
-  scrollbar-gutter: stable both-edges;/* prevents layout shift when it appears */
-}
   <!-- Navigation -->
   <header class="nav">
     <div class="nav-inner">
