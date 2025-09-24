@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>My Portfolio</title>
+<title>Wolfgang Laimer</title>
 <style>
   body {
     background: #fff;
@@ -18,14 +18,17 @@
     height: 60px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between; /* spread items to edges */
     position: sticky;
     top: 0;
     background: #fff;
     border-bottom: 1px solid #ddd;
+    z-index: 1000;
+    padding: 0 20px; /* small breathing space from screen edge */
   }
   .nav-inner {
-    width: min(1100px, 92vw);
+    width: 100%;              /* take full width */
+    max-width: none;          /* remove centering restriction */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -41,6 +44,7 @@
 
   /* --- Carousel styles --- */
   .gs-carousel {
+    margin-top: 80px; /* push down so nav and carousel don’t overlap */
     position: relative;
     max-width: 600px;
     margin: 40px auto;
