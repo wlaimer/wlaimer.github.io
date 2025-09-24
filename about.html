@@ -11,18 +11,55 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      font-size: 10pt;
+      font-size: 9pt;
       background: #fff;
       color: #000;
+      margin: 0;
+    }
+    .nav {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 0 20px;
+    }
+    .brand img {
+      height: 40px;
+    }
+    .links a {
+      text-decoration: none;
+      color: #000;
+      font-weight: normal;
+      margin-left: 20px;
+    }
+    .links a.active {
+      font-weight: bold;
+    }
+    main {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      height: calc(100vh - 60px);
     }
   </style>
 </head>
 <body>
-  <p>This is me</p>
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="brand">
+      <img src="images/logo.png" alt="My Logo">
+    </div>
+    <nav class="links">
+      <a href="index.html">Work</a>
+      <a href="about.html" class="active">About</a>
+    </nav>
+  </header>
+
+  <!-- Page content -->
+  <main>
+    <p>This is me</p>
+  </main>
 </body>
 </html>
