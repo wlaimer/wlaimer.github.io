@@ -48,87 +48,76 @@
     text-decoration: none;
     color: inherit;
   }
-  .links { display: flex; gap: 20px; }
-  .links a {
-    text-decoration: none;
-    color: #000;
-    font-size: 9pt;
-    font-weight: normal;
-  }
-  @media (max-width: 768px) {
-  .nav {
-    padding: 0 16px;   /* less padding */
-  }
-  .links {
-    gap: 10px;
-  }
-  .links a.active { font-weight: bold; }
+.links { display: flex; gap: 20px; }
+.links a {
+  text-decoration: none;
+  color: #000;
+  font-size: 9pt;
+  font-weight: normal;
+}
+.links a.active { font-weight: bold; }
 
-   /* Project hero */
-  .project-hero {
-    display: flex;
-    gap: 40px;
-    align-items: stretch;           /* equal heights */
-    max-width: 1000px;
-    margin: 60px auto;
-    padding: 0 20px;
-  }
-  .project-hero img {
-    width: 50%;
-    height: auto;
-    border-radius: 6px;
-    object-fit: cover;
-  }
-      }
+/* ---- DESKTOP / DEFAULT ---- */
+.project-hero {
+  display: flex;
+  gap: 40px;
+  align-items: stretch;        /* equal heights */
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+.project-hero img {
+  width: 50%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+.project-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.info-top { margin-top: 80px; }
+.project-info h1 {
+  font-size: 30pt;
+  margin: 0;
+  line-height: 0.9;
+}
+.project-info h2 {
+  font-size: 15pt;
+  margin: 10px 0 0;
+  max-width: 450px;
+  line-height: 1.3;
+}
+.project-caption {
+  font-size: 9pt;
+  margin-top: auto;            /* push to bottom of column */
+  margin-bottom: 30px;         /* distance from bottom */
+  max-width: 300px;
+}
+
+/* ---- MOBILE ONLY ---- */
 @media (max-width: 768px) {
+  .nav { padding: 0 16px; }
+  .links { gap: 10px; }
+
   .project-hero {
-    flex-direction: column;   /* stack image + text */
+    flex-direction: column;    /* stack image + text */
     gap: 20px;
     margin: 20px auto;
   }
-  .project-hero img {
-    width: 100%;              /* full width image */
-  }
-  .project-info h1 {
-    font-size: 20pt;          /* smaller headings */
-  }
+  .project-hero img { width: 100%; }
+
+  .project-info h1 { font-size: 20pt; }
   .project-info h2 {
     font-size: 12pt;
-    max-width: 100%;          /* allow text to flow */
+    max-width: 100%;
   }
   .project-caption {
     font-size: 8pt;
     margin-bottom: 20px;
   }
 }
-  .project-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Lower the headings slightly */
-  .info-top { margin-top: 80px; }   /* tweak this value to lower them more/less */
-
-  .project-info h1 {
-    font-size: 30pt;
-    margin: 0;
-    line-height: 0.9;
-  }
-
-  .project-info h2 {
-    font-size: 15pt;
-    margin: 10px 0 0;
-    max-width: 450px;
-    line-height: 1.3;
-  }
-
-  /* Caption pinned to bottom with small gap */
-  .project-caption {
-    font-size: 9pt;
-    margin-top: auto;               /* push to bottom of column */
-    margin-bottom: 30px;            /* distance from bottom (adjust) */
-    max-width: 300px;
   }
 </style>
 </head>
