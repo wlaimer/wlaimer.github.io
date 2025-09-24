@@ -195,6 +195,7 @@ p {
   .nav {
     padding: 0 16px; /* slimmer nav padding on phones */
   }
+	
 </style>
 </head>
 <body>
@@ -271,9 +272,8 @@ p {
 <script>
 (function(){
   const track = document.getElementById('track');
-  const STEP_MS = 1500; // 1,5-second jump
-  const GAP = 16;       // must match .slide{ margin-right: 16px }
-
+  const STEP_MS = 1500;
+  const GAP = 16;
   const originals = Array.from(track.children);
   const N = originals.length;
   originals.forEach(n => track.appendChild(n.cloneNode(true)));
@@ -304,14 +304,7 @@ p {
     }
     goTo(index, true);
   }
-  function start(){ stop(); timer = setInterval(stepForward, STEP_MS); }
-  function stop(){ if (timer) { clearInterval(timer); timer = null; } }
-
-  document.querySelector('.next').addEventListener('click', () => {
-    stop(); stepForward(); start();
-  });
-  document.querySelector('.prev').addEventListener('click', () => {
-    stop();
+  function stepBack() {
     if (index === 0) {
       goTo(N, false);
       requestAnimationFrame(() => goTo(N - 1, true));
@@ -319,7 +312,15 @@ p {
       goTo(index - 1, true);
       index -= 1;
     }
-    start();
+  }
+  function start(){ stop(); timer = setInterval(stepForward, STEP_MS); }
+  function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+
+  document.querySelector('.next').addEventListener('click', () => {
+    stop(); stepForward(); start();
+  });
+  document.querySelector('.prev').addEventListener('click', () => {
+    stop(); stepBack(); start();
   });
 
   const viewport = track.parentElement;
@@ -329,9 +330,33 @@ p {
   viewport.addEventListener('focusout', start);
   window.addEventListener('resize', () => goTo(index, false));
 
+  // --- TOUCH SWIPE SUPPORT ---
+  let startX = 0;
+  let endX = 0;
+
+  viewport.addEventListener('touchstart', e => {
+    stop();
+    startX = e.touches[0].clientX;
+  });
+
+  viewport.addEventListener('touchmove', e => {
+    endX = e.touches[0].clientX;
+  });
+
+  viewport.addEventListener('touchend', () => {
+    const delta = endX - startX;
+    if (Math.abs(delta) > 50) { // threshold in px
+      if (delta < 0) {
+        stepForward(); // swipe left → next
+      } else {
+        stepBack();    // swipe right → prev
+      }
+    }
+    start();
+  });
+
   goTo(0, false);
   start();
 })();
 </script>
-</body>
-</html>
+
