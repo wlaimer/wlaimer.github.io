@@ -62,28 +62,32 @@
   .project-caption { font-size: 9pt; margin-top: auto; margin-bottom: 30px; max-width: 300px; }
 
   /* ---- MOBILE ONLY ---- */
-  @media (max-width: 768px) {
-    .nav { padding: 0 16px; }
+@media (max-width: 768px) {
+  .project-hero {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 16px;
+    margin: 20px 0;
+  }
 
-    .project-hero {
-      flex-direction: column;   /* stack image + text */
-      gap: 20px;
-	 padding: 0 16px;   /* statt 20px – stimmt mit der Nav überein */
+  /* Reihenfolge innerhalb des Info-Blocks */
+  .project-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-top { order: 1; margin-top: 20px; }
+  .project-info h2 { order: 2; margin-bottom: 20px; }
+  .project-caption { order: 3; }
 
-      margin: 20px auto;
-    }
-    .project-hero img { width: 100%;  order: 3;  }
-  .info-top {
-    margin-top: 40px;   /* smaller gap under the image */
-	   order: 2;   /* push image after text */
-  }
-	    .project-info {
-    order: 1;   /* text first */
-  }
-    .project-info h1 { font-size: 20pt; }
-    .project-info h2 { font-size: 12pt; max-width: 100%; margin-bottom: 40px; }
-    .project-caption { font-size: 8pt; margin-bottom: 20px; }
-  }
+  /* Bild ganz ans Ende */
+  .project-hero img { order: 4; width: 100%; }
+
+  /* Typografie-Anpassungen */
+  .project-info h1 { font-size: 20pt; }
+  .project-info h2 { font-size: 12pt; max-width: 100%; }
+  .project-caption { font-size: 8pt; margin-bottom: 20px; }
+}
+
 </style>
 </head>
 <body>
