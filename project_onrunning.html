@@ -68,15 +68,17 @@
     .project-hero {
       flex-direction: column;   /* stack image + text */
       gap: 20px;
+	 padding: 0 16px;   /* statt 20px – stimmt mit der Nav überein */
+
       margin: 20px auto;
     }
     .project-hero img { width: 100%;  order: 3;  }
   .info-top {
     margin-top: 40px;   /* smaller gap under the image */
-	   order: 1;   /* push image after text */
+	   order: 2;   /* push image after text */
   }
 	    .project-info {
-    order: 2;   /* text first */
+    order: 1;   /* text first */
   }
     .project-info h1 { font-size: 20pt; }
     .project-info h2 { font-size: 12pt; max-width: 100%; margin-bottom: 40px; }
