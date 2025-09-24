@@ -1,141 +1,188 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Portfolio</title>
-  <meta name="description" content="Personal portfolio" />
-  <style>
-    /* --- CSS Reset (lightweight) --- */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body { margin: 0; line-height: 1.5; -webkit-font-smoothing: antialiased; }
-    img, picture, video, canvas, svg { display: block; max-width: 100%; }
-    input, button, textarea, select { font: inherit; }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>My Portfolio</title>
+<style>
+  body {
+    background: #fff;
+    color: #000;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10pt;
+    margin: 0;
+  }
 
-    /* --- Design tokens --- */
-    :root {
-      --bg: #ffffff;
-      --text: #0f172a; /* slate-900 */
-      --muted: #64748b; /* slate-500 */
-      --ring: #e5e7eb;  /* gray-200 */
-      --radius: 16px;
-      --nav-h: 64px;
-      --content-max: 820px; /* max width for the image container */
-      --shadow: 0 10px 25px rgba(0,0,0,.08);
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0b0f19;
-        --text: #e5e7eb;
-        --muted: #94a3b8;
-        --ring: #1f2937;
-        --shadow: 0 10px 25px rgba(0,0,0,.35);
-      }
-    }
+  /* --- Navigation bar --- */
+  .nav {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  .nav-inner {
+    width: min(1100px, 92vw);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    font-weight: bold;
+  }
+  .links { display: flex; gap: 20px; }
+  .links a {
+    text-decoration: none;
+    color: #000;
+  }
 
-    body { 
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    /* --- Top navigation --- */
-    .nav {
-      height: var(--nav-h);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: sticky; /* stays at top on scroll */
-      top: 0;
-      background: var(--bg);
-      z-index: 10;
-    }
-    .nav-inner {
-      width: min(1100px, 92vw);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .brand {
-      font-weight: 800;
-      letter-spacing: 0.2px;
-      font-size: 1.05rem;
-    }
-    .links { display: flex; gap: 22px; }
-    .links a {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 600;
-      opacity: .85;
-    }
-    .links a[aria-current="page"], .links a:hover { opacity: 1; }
-
-    /* --- Main area with centered image --- */
-    main {
-      min-height: calc(100vh - var(--nav-h));
-      display: grid;
-      place-items: start center; /* center horizontally, start vertically */
-      padding: 6vh 0 10vh;
-    }
-    .frame {
-      width: min(var(--content-max), 92vw);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      background: #000; /* helps avoid white flash around images */
-    }
-    .frame img { width: 100%; height: auto; display: block; }
-
-    /* --- Footer (optional) --- */
-    footer { 
-      padding: 48px 0; text-align: center; color: var(--muted);
-    }
-
-    /* --- (Future) Carousel scaffolding --- */
-    .carousel { position: relative; }
-    .carousel > .slide { display: block; }
-    /* If you add multiple slides later, you can switch to overflow-hidden and translateX for slides. */
-  </style>
+  /* --- Carousel styles --- */
+  .gs-carousel {
+    position: relative;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+  .viewport {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .track {
+    display: flex;
+    will-change: transform;
+    transition: transform .45s ease;
+  }
+  .slide {
+    flex: 0 0 100%;
+    margin-right: 16px;
+    line-height: 0;
+  }
+  .slide img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter .35s ease, transform .35s ease;
+    display: block;
+  }
+  .slide:hover img, .slide:focus img {
+    filter: grayscale(0%);
+    transform: scale(1.01);
+  }
+  .nav-btn{
+    position:absolute; top:50%; transform:translateY(-50%);
+    border:0; width:40px; height:40px; border-radius:999px;
+    background:rgba(0,0,0,.55); color:#fff; font-size:22px;
+    display:grid; place-items:center; cursor:pointer; user-select:none;
+    opacity:0; pointer-events:none; transition:opacity .2s ease;
+    z-index: 2;
+  }
+  .prev{ left:12px; }
+  .next{ right:12px; }
+  .gs-carousel:hover .nav-btn,
+  .gs-carousel:focus-within .nav-btn { opacity:1; pointer-events:auto; }
+</style>
 </head>
 <body>
-  <!-- Top Navigation -->
-  <header class="nav" role="navigation" aria-label="Primary">
+
+  <!-- Navigation -->
+  <header class="nav">
     <div class="nav-inner">
-      <div class="brand" id="logo">Your Logo</div>
+      <div class="brand">Your Logo</div>
       <nav class="links">
-        <a href="#work" aria-current="page">Work</a>
+        <a href="#work">Work</a>
         <a href="#about">About</a>
       </nav>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    <section class="frame carousel" id="work" aria-label="Featured image">
-      <!-- Replace hero.jpg with your own image path. Large, retina-ready image recommended. -->
-      <img src="pogfdgd5.jpg" alt="Featured project preview" loading="eager" decoding="async">
-      <!-- (Later) Duplicate this <img> inside .carousel with class="slide" per image, then enhance with JS. -->
-    </section>
-  </main>
+  <!-- Carousel -->
+  <div class="gs-carousel" aria-label="Image carousel">
+    <div class="viewport">
+      <div class="track" id="track">
+        <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="pogfdgd5.jpg" alt="Sample image 1">
+        </a>
+        <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="porfdsaffdsa5.jpg" alt="Sample image 2">
+        </a>
+        <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="images/third.jpg" alt="Sample image 3">
+        </a>
+      </div>
+    </div>
+    <button class="nav-btn prev" aria-label="Previous">‹</button>
+    <button class="nav-btn next" aria-label="Next">›</button>
+  </div>
 
-  <footer>
-    © <span id="y"></span> Your Name
-  </footer>
+<script>
+(function(){
+  const track = document.getElementById('track');
+  const STEP_MS = 2000; // 2-second jump
+  const GAP = 16;       // must match .slide{ margin-right: 16px }
 
-  <script>
-    // Simple year stamp
-    document.getElementById('y').textContent = new Date().getFullYear();
+  const originals = Array.from(track.children);
+  const N = originals.length;
+  originals.forEach(n => track.appendChild(n.cloneNode(true)));
+  const slides = Array.from(track.children);
 
-    // Carousel placeholder: keeps code ready for later expansion
-    // Example API surface you can fill in later.
-    /*
-    const slides = Array.from(document.querySelectorAll('.carousel .slide'));
-    let i = 0;
-    function show(n){ slides.forEach((s,idx)=> s.style.display = idx===n ? 'block' : 'none'); }
-    setInterval(()=>{ i = (i+1) % slides.length; show(i); }, 4000);
-    show(0);
-    */
-  </script>
+  function stepWidth() {
+    const viewport = track.parentElement.clientWidth;
+    return viewport + GAP;
+  }
+
+  let index = 0;
+  let timer = null;
+
+  function setTransform(i, smooth) {
+    track.style.transition = smooth ? 'transform .45s ease' : 'none';
+    track.style.transform  = `translateX(${-i * stepWidth()}px)`;
+  }
+  function goTo(i, smooth=true) {
+    index = i;
+    setTransform(index, smooth);
+  }
+  function stepForward() {
+    index += 1;
+    if (index === N) {
+      goTo(index, true);
+      setTimeout(() => { goTo(0, false); }, 460);
+      return;
+    }
+    goTo(index, true);
+  }
+  function start(){ stop(); timer = setInterval(stepForward, STEP_MS); }
+  function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+
+  document.querySelector('.next').addEventListener('click', () => {
+    stop(); stepForward(); start();
+  });
+  document.querySelector('.prev').addEventListener('click', () => {
+    stop();
+    if (index === 0) {
+      goTo(N, false);
+      requestAnimationFrame(() => goTo(N - 1, true));
+    } else {
+      goTo(index - 1, true);
+      index -= 1;
+    }
+    start();
+  });
+
+  const viewport = track.parentElement;
+  viewport.addEventListener('mouseenter', stop);
+  viewport.addEventListener('mouseleave', start);
+  viewport.addEventListener('focusin',  stop);
+  viewport.addEventListener('focusout', start);
+  window.addEventListener('resize', () => goTo(index, false));
+
+  goTo(0, false);
+  start();
+})();
+</script>
 </body>
 </html>
