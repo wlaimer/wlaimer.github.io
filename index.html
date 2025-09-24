@@ -306,8 +306,12 @@ p {
   }
 function stepBack() {
   if (index === 0) {
-    // jump straight to last real slide, no animation → no blank frame
-    goTo(N - 1, false);
+    // 1) snap to the cloned "start" at the end (index N), no animation
+    goTo(N, false);
+    // 2) on the next frame, animate to the last real slide (index N-1)
+    requestAnimationFrame(() => {
+      goTo(N - 1, true);
+    });
   } else {
     goTo(index - 1, true);
   }
