@@ -87,6 +87,41 @@ p {
 .light {
   font-weight: normal;
 }
+	/* Mobile styles */
+@media (max-width: 768px) {
+  main {
+    margin-left: 5%;      /* less left margin on small screens */
+    padding: 20px 10px;   /* tighter padding */
+    max-width: 100%;      /* allow full width */
+  }
+
+  h2 {
+    font-size: 10pt;      /* slightly smaller headings */
+  }
+
+  p {
+    font-size: 9pt;       /* keep body text readable */
+    line-height: 1.6;
+  }
+
+  /* Skills section: stack instead of 3 columns */
+  .skills {
+    flex-direction: column;
+    gap: 20px;            /* spacing between stacked columns */
+  }
+
+  .skills div {
+    width: 100%;
+  }
+
+  /* Navigation bar: tighten spacing */
+  .nav {
+    padding: 0 20px;
+  }
+  .links {
+    gap: 12px;
+  }
+}
     /* Main layout */
     main {
       max-width: 800px;
