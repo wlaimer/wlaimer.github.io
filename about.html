@@ -133,23 +133,44 @@ p {
 
 /* --- Mobile layout only --- */
 @media (max-width: 768px) {
+  /* give the whole page breathing room on the sides */
+  .nav {
+    padding: 0 16px; /* slimmer nav padding on phones */
+  }
+
+  main {
+    max-width: none;
+    margin: 0;                 /* no desktop offset */
+    padding: 24px 16px 56px;   /* distance to the border */
+  }
+
   .intro {
-    flex-direction: column;   /* stack image + text */
-    align-items: center;      /* centers only the image */
-    gap: 20px;
-    margin: 20px auto;
+    flex-direction: column;    /* stack image + text */
+    align-items: flex-start;   /* LEFT align everything */
+    gap: 16px;                 /* small distance between image and text */
+    margin: 0;                 /* no extra centering margins */
   }
 
   .intro img {
-    width: 60%;               /* portrait scales */
-    max-width: 200px;
-    margin: 0 auto;           /* center image horizontally */
+    width: 100%;               /* make the portrait nice and big */
+    max-width: 420px;          /* but don’t let it explode on large phones */
+    height: auto;
+    margin: 0;                 /* keep left aligned */
+    border-radius: 6px;
   }
 
   .intro-text {
-    margin: 0 5%;             /* space from screen edge */
-    max-width: 90%;
-    text-align: left;         /* stays left aligned */
+    width: 100%;
+    max-width: 65ch;           /* flexible line length for readability */
+    text-align: left;          /* ensure left alignment */
+  }
+
+  /* stack skills columns on mobile for readability */
+  .skills {
+    flex-direction: column;
+    gap: 12px;
+    max-width: 65ch;           /* align with intro text measure */
+    margin-left: 0;
   }
 }
   </style>
