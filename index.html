@@ -333,30 +333,48 @@ function stepBack() {
   viewport.addEventListener('focusout', start);
   window.addEventListener('resize', () => goTo(index, false));
 
-  // --- TOUCH SWIPE SUPPORT ---
-  let startX = 0;
-  let endX = 0;
+  // Touch swipe
+let startX = 0, lastX = 0;
+const THRESH = 50;
 
-  viewport.addEventListener('touchstart', e => {
-    stop();
-    startX = e.touches[0].clientX;
-  });
+viewport.addEventListener('touchstart', e => {
+  stop();
+  startX = lastX = e.touches[0].clientX;
+}, { passive: true });
 
-  viewport.addEventListener('touchmove', e => {
-    endX = e.touches[0].clientX;
-  });
+viewport.addEventListener('touchmove', e => {
+  lastX = e.touches[0].clientX;
+}, { passive: true });
 
-  viewport.addEventListener('touchend', () => {
-    const delta = endX - startX;
-    if (Math.abs(delta) > 50) { // threshold in px
-      if (delta < 0) {
-        stepForward(); // swipe left → next
+viewport.addEventListener('touchend', () => {
+  const delta = lastX - startX;
+
+  if (Math.abs(delta) > THRESH) {
+    if (delta < 0) {
+      // swipe left → NEXT (unchanged)
+      stepForward();
+    } else {
+      // swipe right → PREV
+      if (index === 0) {
+        // *** mobile-only smooth wrap-back ***
+        // 1) snap to the cloned end without animation
+        goTo(N, false);
+        // 2) wait TWO RAFs so mobile browsers fully commit the snap,
+        //    then animate one slide back like any other step
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            goTo(N - 1, true);
+          });
+        });
       } else {
-        stepBack();    // swipe right → prev
+        // normal prev
+        goTo(index - 1, true);
+        index -= 1;
       }
     }
-    start();
-  });
+  }
+  start();
+});
 
   goTo(0, false);
   start();
