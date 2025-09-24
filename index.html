@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>wolfgang laimer</title>
+   <!-- Google Fonts: Inter -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+   <!-- Favicon -->
+<link rel="icon" href="media/laimer_favicon_01.png" type="image/x-icon">
+<style>
+   body {  font-family: 'Inter', sans-serif;
+  font-size: 9pt;
+  line-height: 0.9;   /* adjust until it feels right */
+  background: #fff;
+  color: #000;
+  margin: 0;
+}
+p {
+  margin: 0 0 0px;  /* equal bottom spacing between paragraphs */
+}
+	html {
+ 	 overflow-y: scroll; /* always show vertical scrollbar */
+	}
+  /* --- Navigation bar --- */
+  .nav {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* spread items to edges */
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1000;
+    padding: 0 80px 0 50px; /* top right bottom left */
+  }
+  .nav-inner {
+    width: 100%;              /* take full width */
+    max-width: none;          /* remove centering restriction */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+.brand {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 11pt;
+  text-transform: uppercase;
+  line-height: 0.9;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;  /* remove underline */
+  color: inherit;         /* keep black */
+}
+	.brand {
+	  font-family: 'Inter', sans-serif;
+ 	 font-weight: 800;       /* extra-bold */
+ 	 font-size: 11pt;
+ 	 text-transform: uppercase;
+ 	 line-height: 1.2;       /* tighter spacing between lines */
+ 	 display: flex;
+ 	 flex-direction: column; /* stack text vertically */
+}
+  .links { display: flex; gap: 20px; }
+  .links a {
+    text-decoration: none;
+    color: #000;
+    font-family: Inter, Arial, sans-serif;
+    font-size: 9pt;
+    font-weight: normal;
+    transition: font-weight .2s ease;
+  }
+    .links a.active {
+    font-weight: bold;  /* highlight active link */
+  }
+ a {
+  color: inherit;          /* keep same color as surrounding text */
+  text-decoration: underline;  /* always underlined */
+  font-weight: normal;
+}
+.mini-line {
+  display: block;
+  width: 40px;             /* short line length */
+  border-bottom: 1px solid #000;
+  margin: 4px 0;           /* tiny vertical spacing */
+}
+.light {
+  font-weight: normal;
+}
+
+  /* --- Carousel styles --- */
+  .gs-carousel {
+    margin-top: 80px; /* push down so nav and carousel don’t overlap */
+    position: relative;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+  .viewport {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .track {
+    display: flex;
+    will-change: transform;
+    transition: transform .45s ease;
+  }
+.slide {
+  position: relative; /* so title can sit over image */
+  flex: 0 0 100%;
+  margin-right: 16px;
+  line-height: 0;
+  overflow: hidden;     /* make sure overlay stays inside */
+}
+.slide:hover::after {
+  opacity: 1;
+}
+/* Gradient overlay (hidden by default) */
+.slide::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 60%;  /* how far up the gradient goes */
+  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: hard-light;  /* gives that "hard light" effect */
+  pointer-events: none;        /* so it doesn't block clicks */
+  z-index: 1;                  /* sits behind text */
+}
+/* Make sure text is above overlay */
+.slide-title {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  color: #fff;
+  font-size: 40pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.9;
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+  z-index: 2;   /* text is above overlay */
+}
+
+.slide:hover .slide-title {
+  opacity: 1;
+}
+  .slide img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter .35s ease, transform .35s ease;
+    display: block;
+  }
+  .slide:hover img, .slide:focus img {
+    filter: grayscale(0%);
+    transform: scale(1.01);
+  }
+.slide:hover .slide-title {
+  opacity: 1;                  /* show on hover */
+}
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;    /* just the arrow */
+  color: #fff;         /* white arrow */
+  font-size: 32px;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 2;
+}
+
+.prev { left: 12px; }
+.next { right: 12px; }
+
+.gs-carousel:hover .nav-btn,
+.gs-carousel:focus-within .nav-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+</style>
+</head>
+<body>
+ <!-- Navigation -->
+  <header class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="brand">
+  <div>WOLFGANG</div>
+  <div>LAIMER</div>
+</a>
+<nav class="links">
+  <a href="index.html" class="active">Work</a>
+  <a href="about.html">About</a>
+</nav>
+  </header>
+  <!-- Carousel -->
+  <div class="gs-carousel" aria-label="Image carousel">
+    <div class="viewport">
+      <div class="track" id="track">
+<a class="slide" href="project_onrunning.html">
+  <img src="media/laimer_onrunning_01.jpg" alt="On Running">
+  <div class="slide-title">On<br>Running</div>
+</a>
+        <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_rapidautografing_01.jpg" alt="rapidautografing">
+  <div class="slide-title">Rapid<br>Autografting</div>
+        </a>
+ <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_atomic_01.jpg" alt="atomic">
+  <div class="slide-title">Atomic<br>Ski</div>
+        </a>
+        <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_heatandsweat_01.jpg" alt="heatandsweat">
+  <div class="slide-title">Heat &<br>Sweat</div>
+        </a>
+ <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_grubslippers_01.jpg" alt="grubslippers">
+  <div class="slide-title">Grub<br>Slippers</div>
+        </a>
+ <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_flori_01.jpg" alt="flori">
+  <div class="slide-title">Medication<br>Trolley</div>
+        </a>
+ <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_hangercollapse_01.jpg" alt="hangercollapse">
+  <div class="slide-title">Hanger<br>Collapse</div>
+        </a>
+ <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_multiframe_01.jpg" alt="multiframe">
+  <div class="slide-title">Multi<br>Frame</div>
+        </a>
+ <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_tensoralamp_01.jpg" alt="tensoralamp">
+  <div class="slide-title">Tensora<br>Lamp</div>
+        </a>
+ <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_wolfhaus_01.jpg" alt="wolfhaus">
+  <div class="slide-title">Wolfhaus<br>Booth</div>
+        </a>
+ <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_voglauer_01.jpg" alt="voglauer">
+  <div class="slide-title">Voglauer<br>Hotel</div>
+        </a>
+ <a class="slide" href="#" target="_blank" rel="noopener">
+          <img src="media/laimer_trailrunning_01.jpg" alt="trailrunning">
+  <div class="slide-title">Ultra<br>Trail</div>
+        </a>
+      </div>
+    </div>
+    <button class="nav-btn prev" aria-label="Previous">‹</button>
+    <button class="nav-btn next" aria-label="Next">›</button>
+  </div>
+
+<script>
+(function(){
+  const track = document.getElementById('track');
+  const STEP_MS = 1500; // 1,5-second jump
+  const GAP = 16;       // must match .slide{ margin-right: 16px }
+
+  const originals = Array.from(track.children);
+  const N = originals.length;
+  originals.forEach(n => track.appendChild(n.cloneNode(true)));
+  const slides = Array.from(track.children);
+
+  function stepWidth() {
+    const viewport = track.parentElement.clientWidth;
+    return viewport + GAP;
+  }
+
+  let index = 0;
+  let timer = null;
+
+  function setTransform(i, smooth) {
+    track.style.transition = smooth ? 'transform .45s ease' : 'none';
+    track.style.transform  = `translateX(${-i * stepWidth()}px)`;
+  }
+  function goTo(i, smooth=true) {
+    index = i;
+    setTransform(index, smooth);
+  }
+  function stepForward() {
+    index += 1;
+    if (index === N) {
+      goTo(index, true);
+      setTimeout(() => { goTo(0, false); }, 460);
+      return;
+    }
+    goTo(index, true);
+  }
+  function start(){ stop(); timer = setInterval(stepForward, STEP_MS); }
+  function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+
+  document.querySelector('.next').addEventListener('click', () => {
+    stop(); stepForward(); start();
+  });
+  document.querySelector('.prev').addEventListener('click', () => {
+    stop();
+    if (index === 0) {
+      goTo(N, false);
+      requestAnimationFrame(() => goTo(N - 1, true));
+    } else {
+      goTo(index - 1, true);
+      index -= 1;
+    }
+    start();
+  });
+
+  const viewport = track.parentElement;
+  viewport.addEventListener('mouseenter', stop);
+  viewport.addEventListener('mouseleave', start);
+  viewport.addEventListener('focusin',  stop);
+  viewport.addEventListener('focusout', start);
+  window.addEventListener('resize', () => goTo(index, false));
+
+  goTo(0, false);
+  start();
+})();
+</script>
+</body>
+</html>

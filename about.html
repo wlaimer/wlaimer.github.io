@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>wolfgang laimer - about</title>
+   <!-- Google Fonts: Inter -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+   <!-- Favicon -->
+<link rel="icon" href="media/laimer_favicon_01.png" type="image/x-icon">
+<style>
+   body {  font-family: 'Inter', sans-serif;
+  font-size: 9pt;
+  line-height: 1.8;   /* adjust until it feels right */
+  background: #fff;
+  color: #000;
+  margin: 0;
+}
+p {
+  margin: 0 0 0px;  /* equal bottom spacing between paragraphs */
+}
+	html {
+ 	 overflow-y: scroll; /* always show vertical scrollbar */
+	}
+  /* --- Navigation bar --- */
+  .nav {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* spread items to edges */
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1000;
+    padding: 0 80px 0 50px; /* top right bottom left */
+  }
+  .nav-inner {
+    width: 100%;              /* take full width */
+    max-width: none;          /* remove centering restriction */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+.brand {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 11pt;
+  text-transform: uppercase;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;  /* remove underline */
+  color: inherit;         /* keep black */
+}
+	.brand {
+	  font-family: 'Inter', sans-serif;
+ 	 font-weight: 800;       /* extra-bold */
+ 	 font-size: 11pt;
+ 	 text-transform: uppercase;
+ 	 line-height: 1.2;       /* tighter spacing between lines */
+ 	 display: flex;
+ 	 flex-direction: column; /* stack text vertically */
+}
+  .links { display: flex; gap: 20px; }
+  .links a {
+    text-decoration: none;
+    color: #000;
+    font-family: Inter, Arial, sans-serif;
+    font-size: 9pt;
+    font-weight: normal;
+    transition: font-weight .2s ease;
+  }
+    .links a.active {
+    font-weight: bold;  /* highlight active link */
+  }
+ a {
+  color: inherit;          /* keep same color as surrounding text */
+  text-decoration: underline;  /* always underlined */
+  font-weight: normal;
+}
+.mini-line {
+  display: block;
+  width: 40px;             /* short line length */
+  border-bottom: 1px solid #000;
+  margin: 4px 0;           /* tiny vertical spacing */
+}
+.light {
+  font-weight: normal;
+}
+    /* Main layout */
+    main {
+      max-width: 800px;
+      margin-left: 35%; /* ~1/4 from the left */
+      padding: 40px 20px;
+    }
+    section { margin-bottom: 40px; }
+    h2 {
+      margin: 0 0 0px;
+      font-weight: 700;
+      font-size: 9pt; /* same size, but bold */
+    }
+
+    /* Skills: 3 columns, no bullets */
+.skills {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  max-width: 700px;
+  margin-left: 0;   /* same as your main block */
+    }
+    .skills div {
+      flex: 1;
+    }
+    .skills p {
+      margin: 0 0 0px; /* equal spacing */
+ }
+  .intro {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* space between image and text */
+  }
+
+  .intro img {
+    width: 220px;   /* change to the size you want */
+    height: auto;
+    border-radius: 6px; /* optional rounded corners */
+    flex-shrink: 0;     /* don’t let the image shrink */
+  }
+  .intro-text {
+    flex: 1; /* take the remaining width */
+ max-width: 250px; 
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="brand">
+  <div>WOLFGANG</div>
+  <div>LAIMER</div>
+</a>
+    <nav class="links">
+      <a href="index.html">Work</a>
+      <a href="about.html" class="active">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Intro -->
+    <section class="intro">
+  <img src="media/laimer_profil_01.jpg" alt="Portrait of Wolfgang Laimer">
+<div class="intro-text">
+      <p><h2>Hey!</strong></p>
+  	<p>I'm Wolfgang,</h2></p>
+	<br>
+      <p>
+an interdisciplinary designer working at the intersection of design, technology, and relational ecologies. My practice centers on multisensory product experiences, performance footwear, and material-led innovation. In addition to practical problem-solving through design, I emphasize the potential of creative research to generate awareness, knowledge, and understanding of complex issues.
+      </p>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <h2>Experience</h2>
+      <p>2025 — Footwear Designer Performance Running Intern · On AG</p>
+      <p>2020 — Sporting Goods Designer Intern · Atomic Austria GmbH</p>
+      <p>2017 — 3D Artist Intern · Zuchna Visualisation</p>
+      <p>2012–2016 — Interior Project Technician · Voglauer GmbH, Hotel Concept</p>
+      <p>2011–2012 — Carpentry Technician · Voglauer GmbH</p>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h2>Education</h2>
+      <p>2022–2024 — MFA, Design Ecologies · Konstfack University of Arts, Crafts & Design</p>
+      <p>2020–2025 — BA, Analytic Philosophy · Paris Lodron University of Salzburg</p>
+      <p>2018–2021 — BA, Design & Product Management · Salzburg University of Applied Sciences</p>
+      <p>2016–2018 — College, Product- and System Design · HTL Hallein</p>
+      <p>2005–2010 — Carpentry Technology · HTL Hallein</p>
+    </section>
+
+    <!-- Awards -->
+    <section>
+      <h2>Awards & Exhibitions</h2>
+      <p>2025 — Core77 Design Award · Notable Honoree, Sustainability</p>
+      <p>2025 — iF Design Award · Winner, Responsible Consumption & Production</p>
+      <p>2025 — FIT Sport Design Award · Winner, Sportswear / Footwear</p>
+      <p>2025 — Exhibition Interdependence · Milano Design Week, Fuorisalone</p>
+      <p>2024 — Global Footwear Award · Emerging Talent, Sustainability & Running</p>
+      <p>2024 — Special Award · Best Master’s Thesis of the Year, Konstfack</p>
+      <p>2024 — Exhibition Hyper Human · Tekniska Museet, Stockholm (one-year)</p>
+      <p>2024 — Scholarship · Konstfack Foundation for meritorious students, Financial award</p>
+      <p>2023 — Scholarship · Beata Brummer & Ulla Fröberg Cramér Foundation, Financial award</p>
+      <p>2022 — Salzburg State Award · Marketing, Communication & Design, 3rd Place</p>
+      <p>2020 — Merit Scholarship · Salzburg University of Applied Science, Financial award</p>
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <br>
+      <div class="skills">
+  <div>
+    <h2>Design</h2>
+    <p>Multisensory Design</p>
+    <p>Footwear Design</p>
+    <p>Sustainable & Ecocentric</p>
+    <p>Design Management</p>
+    <p>User Interface Design</p>
+    <p>User Experience Design</p>
+    <p>Product Development</p>
+    <p>Phyiscal & Digital Prototyping</p>
+    <p>Traditional & Digital Sketching</p>
+    <p>3D CAD Modeling</p>
+    <p>Qualitative & Quantitative Research</p>
+    <p>Conceptual & Material Exploration</p>
+    <p>User-Centered Design</p>
+  </div>
+  <div>
+    <h2>Research</h2>
+    <p>Philosophical Research</p>
+    <p>Critical Thinking</p>
+    <p>Structured Argumentation</p>
+    <p>Analytical Writing</p>
+    <p>Ethical Evaluation</p>
+    <p>Ecoliteracy</p>
+    <p>Sustainability Research</p>
+    <p>Design Theory</p>
+    <p>Metadesign</p>
+  </div>
+ <div>
+  <h2>Software <span class="light">(High–Mid–Low)</span></h2>
+  <p>Microsoft Office</p>
+  <p>AutoCAD</p>
+  <p>Adobe Photoshop, Illustrator, InDesign, After Effects, Premiere Pro</p>
+
+  <span class="mini-line"></span> <!-- short line -->
+
+  <p>Solidworks</p>
+  <p>Rhinoceros</p>
+  <p>3ds Max</p>
+  <p>KeyShot</p>
+  <p>Blender</p>
+  <p>AI Visualization (Midjourney, Vizcom, Runway, Adobe Firefly)</p>
+
+  <span class="mini-line"></span> <!-- short line -->
+
+  <p>Fusion</p>
+  <p>Grasshopper</p>
+  <p>Gravity Sketch</p>
+</div>
+</div>
+    </section>
+
+<section>
+  <h2>Interview</h2>
+  <p><a href="https://d5mag.com/designing-at-the-intersection-of-biology-and-performance-an-interview-with-wolfgang-laimer/" target="_blank">2025 — D5 MAG: Designing at the intersection of biology and performance</a></p>
+</section>
+
+<section>
+  <h2>Get in touch</h2>
+  <p>laimer.w@gmail.com</p>
+  <p><a href="https://www.instagram.com/wolfganglaimer" target="_blank">Instagram</a></p>
+  <p><a href="https://www.linkedin.com/in/wolfgang-laimer/" target="_blank">LinkedIn</a></p>
+</section>
+
+  </main>
+</body>
+</html>
