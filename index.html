@@ -304,28 +304,16 @@ p {
     }
     goTo(index, true);
   }
-function snapTo(i) {
-  index = i;
-  track.style.transition = 'none';                 // no animation
-  track.style.transform  = `translateX(${-i * stepWidth()}px)`;
-  // Force the browser to apply the style NOW (flush layout)
-  void track.offsetWidth;                          // reflow
-}
-
-function animateTo(i) {
-  index = i;
-  track.style.transition = 'transform .45s ease';  // animate
-  track.style.transform  = `translateX(${-i * stepWidth()}px)`;
-}
-
 function stepBack() {
   if (index === 0) {
-    // 1) Snap instantly to the cloned end (not visible due to overflow)
-    snapTo(N);
-    // 2) Then animate one slide back; reflow above prevents the jump flash
-    requestAnimationFrame(() => animateTo(N - 1));
+    // 1) snap to the cloned "start" at the end (index N), no animation
+    goTo(N, false);
+    // 2) on the next frame, animate to the last real slide (index N-1)
+    requestAnimationFrame(() => {
+      goTo(N - 1, true);
+    });
   } else {
-    animateTo(index - 1);
+    goTo(index - 1, true);
   }
 }
   function start(){ stop(); timer = setInterval(stepForward, STEP_MS); }
