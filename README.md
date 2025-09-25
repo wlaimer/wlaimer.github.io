@@ -1,7 +1,7 @@
 # Wolfgang Laimer – Portfolio Website
 
 This is the source code for my personal portfolio website.  
-The site showcases my design practice, projects, and research interests.
+The site is supposed to showcase my design work.
 
 ## Live Site
 You can view the published site here:  
