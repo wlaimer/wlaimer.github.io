@@ -78,10 +78,29 @@ p {
     .links a.active {
     font-weight: bold;  /* highlight active link */
   }
- a {
-  color: inherit;          /* keep same color as surrounding text */
-  text-decoration: underline;  /* always underlined */
-  font-weight: normal;
+/* Global link style (site-wide) */
+a {
+  color: #000;                       /* black */
+  text-decoration: none;             /* no underline */
+  transition: color 0.2s ease;       /* subtle fade */
+}
+a:hover {
+  color: rgba(0,0,0,0.8);            /* ~80% black on hover */
+}
+/* Keep visited links from turning purple */
+a:visited {
+  color: #000;
+}
+
+/* Keyboard accessibility (recommended) */
+a:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  a { transition: none; }
 }
 .mini-line {
   display: block;
