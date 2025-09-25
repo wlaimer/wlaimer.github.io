@@ -124,7 +124,30 @@ main {
   .project-info h2 { font-size: 12pt; max-width: 100%; }
   .project-caption { font-size: 8pt; margin-bottom: 20px; }
 }
+/* --- Link fade (site-wide) — place LAST --- */
+a {
+  color: #000;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+a:hover { color: rgba(0,0,0,.6); }
+a:visited { color: #000; }
 
+/* Brand fades too */
+.brand { color:#000; transition: color .2s ease; }
+.brand:hover { color: rgba(0,0,0,.6); }
+
+/* Ensure nav + footer lists don't lock color on hover */
+.links a,
+.project-links a {
+  color:#000;
+  text-decoration:none;
+  transition: color .2s ease;
+}
+.links a:hover,
+.project-links a:hover {
+  color: rgba(0,0,0,.6);
+}
 </style>
 </head>
 <body>
