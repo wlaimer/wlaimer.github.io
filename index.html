@@ -41,6 +41,14 @@ p {
     align-items: center;
     justify-content: space-between;
   }
+	.page-meta {
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 9pt;         /* matches About/Work link size */
+  line-height: 1.4;
+  color: #000;
+  margin: 16px 0 40px;    /* space above and below */
+}
 .brand {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
@@ -264,6 +272,9 @@ p {
   <div class="slide-title">Ultra<br>Trail</div>
         </a>
       </div>
+		<div class="page-meta">
+  © <span id="meta-year"></span> · Zürich, CH
+</div>
     </div>
     <button class="nav-btn prev" aria-label="Previous">‹</button>
     <button class="nav-btn next" aria-label="Next">›</button>
@@ -380,4 +391,7 @@ viewport.addEventListener('touchend', () => {
   start();
 })();
 </script>
-
+	
+<script>
+  document.getElementById('meta-year').textContent = new Date().getFullYear();
+</script>
