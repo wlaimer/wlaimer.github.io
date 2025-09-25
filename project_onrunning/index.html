@@ -146,15 +146,17 @@ a:visited { color: #000; }
 
 /* Two images side by side */
 .image-row {
-  display: flex;       /* ⬅ puts images in a row */
+  display: flex;
   gap: 20px;
+  max-width: 1000px;   /* same width container as hero section */
+  margin: 0 auto;      /* centers the row horizontally */
 }
 
 .image-row img {
-  flex: 1 1 0;         /* equal widths */
-  width: 100%;         /* fill each flex item */
+  flex: 1;
   border-radius: 12px;
   object-fit: cover;
+  width: 100%;         /* each fills its half */
 }
 
 	
