@@ -37,6 +37,28 @@ p {
 	html {
  	 overflow-y: scroll; /* always show vertical scrollbar */
 	}
+
+html, body { height: 100%; }              /* allow full-viewport layout */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;                  /* header, main, footer stacked */
+}
+
+main { flex: 1; }                          /* take remaining space */
+
+.page-meta {
+  border-top: 1px solid #000;
+  padding: 10px 0 5px;                     /* no side padding; full width */
+  text-align: center;
+  font-size: 8pt;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* optional spacing above footer; tweak or remove */
+  margin-top: 40px;
+}
+	
   /* --- Navigation bar --- */
   .nav {
     height: 60px;
@@ -236,6 +258,8 @@ p {
     </nav>
   </div>
 </header>
+
+	<main>
   <!-- Carousel -->
   <div class="gs-carousel" aria-label="Image carousel">
     <div class="viewport">
@@ -293,10 +317,13 @@ p {
     <button class="nav-btn prev" aria-label="Previous">‹</button>
     <button class="nav-btn next" aria-label="Next">›</button>
   </div>
+	</main>
 	
 <footer class="page-meta">
   Zürich, <span id="meta-year"></span>
 </footer>
+	</body>
+
 	
 <script>
 (function(){
