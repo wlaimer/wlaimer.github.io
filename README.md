@@ -20,4 +20,4 @@ You can view the published site here:
 - **CSS3** – typography, layout, and styling  
 - **JavaScript (vanilla)** – image carousel functionality  
 - **Google Fonts** – [Inter](https://fonts.google.com/specimen/Inter) for typography  
-- **GitHub Pages** – free hosting
+- **GitHub Pages**
