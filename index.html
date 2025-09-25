@@ -349,6 +349,15 @@ function stepBack() {
     stop(); stepBack(); start();
   });
 
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') {
+    stop(); stepForward(); start();
+  } else if (e.key === 'ArrowLeft') {
+    stop(); stepBack(); start();
+  }
+});
+	
   const viewport = track.parentElement;
   viewport.addEventListener('mouseenter', stop);
   viewport.addEventListener('mouseleave', start);
