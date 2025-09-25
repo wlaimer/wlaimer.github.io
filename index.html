@@ -47,7 +47,7 @@ p {
   font-size: 9pt;         /* matches About/Work link size */
   line-height: 1.4;
   color: #000;
-  margin: 16px 0 40px;    /* space above and below */
+  margin: 80px 0 40px;    /* space above and below */
 }
 .brand {
   font-family: 'Inter', sans-serif;
@@ -203,7 +203,8 @@ p {
   .nav {
     padding: 0 16px; /* slimmer nav padding on phones */
   }
-	
+	 }
+
 </style>
 </head>
 <body>
@@ -272,14 +273,15 @@ p {
   <div class="slide-title">Ultra<br>Trail</div>
         </a>
       </div>
-		<div class="page-meta">
-  © <span id="meta-year"></span> · Zürich, CH
-</div>
     </div>
     <button class="nav-btn prev" aria-label="Previous">‹</button>
     <button class="nav-btn next" aria-label="Next">›</button>
   </div>
-
+	
+	<div class="page-meta">
+  <span id="meta-year"></span> — Zürich, CH
+</div>
+	
 <script>
 (function(){
   const track = document.getElementById('track');
