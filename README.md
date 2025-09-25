@@ -6,7 +6,7 @@ The site showcases my design practice, projects, and research interests.
 ## Live Site
 You can view the published site here:  
 [https://wlaimer.github.io/index.html](https://wlaimer.github.io/index.html)
-[https://wolfganglaimer.com]([https://wlaimer.github.io/index.html](https://wolfganglaimer.com))
+[https://wolfganglaimer.com](https://wolfganglaimer.com)
 
 ## Project Structure
 - `index.html` → **Work** page (main landing page with project carousel)  
