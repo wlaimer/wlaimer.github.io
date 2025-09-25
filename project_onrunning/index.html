@@ -147,18 +147,18 @@ a:visited { color: #000; }
 /* Two images side by side */
 .image-row {
   display: flex;
+	 justify-content: center; /* keeps the pair centered in the page */
   gap: 20px;
   max-width: 1000px;   /* same width container as hero section */
-  margin: 0 auto;      /* centers the row horizontally */
+  margin: 40px auto;      /* centers the row horizontally */
 }
 
 .image-row img {
-  flex: 1;
+  width: 50%;              /* each = half of 1000px = 500px */
   border-radius: 12px;
   object-fit: cover;
-  width: 100%;         /* each fills its half */
+  display: block;
 }
-
 	
 /* Ensure nav + footer lists don't lock color on hover */
 .links a,
