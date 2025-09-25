@@ -92,20 +92,16 @@ margin-bottom: 10px;  /* ⬅ space from bottom edge */
   font-weight: 800;
   font-size: 11pt;
   text-transform: uppercase;
-  line-height: 0.9;
+  line-height: 1.2;          /* pick the tighter spacing you want */
   display: flex;
   flex-direction: column;
-  text-decoration: none;  /* remove underline */
-  color: inherit;         /* keep black */
+  text-decoration: none;
+  color: #000;
+  transition: color 0.2s ease; /* smooth fade */
 }
-	.brand {
-	  font-family: 'Inter', sans-serif;
- 	 font-weight: 800;       /* extra-bold */
- 	 font-size: 11pt;
- 	 text-transform: uppercase;
- 	 line-height: 1.2;       /* tighter spacing between lines */
- 	 display: flex;
- 	 flex-direction: column; /* stack text vertically */
+
+.brand:hover {
+  color: rgba(0,0,0,0.6);     /* ~80% black on hover */
 }
   .links { display: flex; gap: 20px; }
   .links a {
