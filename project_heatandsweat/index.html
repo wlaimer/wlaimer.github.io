@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>wolfgang laimer - heat and sweat</title>
+
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+<!-- Favicon -->
+<link rel="icon" href="/media/laimer_favicon_01.png" type="image/x-icon">
+
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 9pt;
+    line-height: 1.6;
+    background: #fff;
+    color: #000;
+    margin: 0;
+  }
+	html {
+ 	 overflow-y: scroll; /* always show vertical scrollbar */
+	}
+		/* Selection style inside about page */
+::selection {
+  background: #000;   /* black background */
+  color: #fff;        /* white text */
+}
+  /* Navigation */
+  .nav {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1000;
+    padding: 0 80px 0 50px;
+  }
+  .nav-inner { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+  .brand { font-weight: 800; font-size: 11pt; text-transform: uppercase; line-height: 1.2; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .links { display: flex; gap: 20px; }
+  .links a { text-decoration: none; color: #000; font-size: 9pt; font-weight: normal; }
+  .links a.active { font-weight: bold; }
+
+  /* ---- DESKTOP / DEFAULT ---- */
+  .project-hero {
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+  .project-hero img {
+    width: 50%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  .project-info { flex: 1; display: flex; flex-direction: column; }
+  .info-top { margin-top: 80px; }
+  .project-info h1 { font-size: 30pt; margin: 0; line-height: 0.9; }
+  .project-info h2 { font-size: 15pt; margin: 10px 0 0; max-width: 450px; line-height: 1.3; }
+  .project-caption { font-size: 9pt; margin-top: auto; margin-bottom: 30px; max-width: 300px; }
+
+main {
+  padding-bottom: 200px;  /* creates white space after your content */
+}
+	
+.project-nav {
+  padding: 10px 20px;
+  margin-top: 60px;
+  text-align: center;
+  background: #fff;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;        /* allow wrapping on small screens */
+  justify-content: center;
+  gap: 16px;              /* spacing between links */
+}
+
+.project-links a {
+  text-decoration: none;
+  color: #000;
+  font-size: 8pt;         /* same as "About" in the header */
+  font-weight: normal;
+}
+
+.project-links a.active {
+  font-weight: bold;
+}
+
+  /* ---- MOBILE ONLY ---- */
+@media (max-width: 768px) {
+	  .nav {
+    padding: 0 16px; /* slimmer nav padding on phones */
+  }
+	.project-hero {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 16px;
+    margin: 20px 0;
+  }
+
+  /* Reihenfolge innerhalb des Info-Blocks */
+  .project-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-top { order: 1; margin-top: 20px; }
+  .project-info h2 { order: 2; margin-bottom: 20px; }
+  .project-caption { order: 3; }
+
+  /* Bild ganz ans Ende */
+  .project-hero img { order: 4; width: 100%; }
+
+  /* Typografie-Anpassungen */
+  .project-info h1 { font-size: 20pt; }
+  .project-info h2 { font-size: 12pt; max-width: 100%; }
+  .project-caption { font-size: 8pt; margin-bottom: 20px; }
+}
+
+</style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <div>WOLFGANG</div>
+        <div>LAIMER</div>
+      </a>
+	     <nav class="links">
+	  <a href="/" class="active">Work</a>
+	  <a href="/about">About</a>
+	</nav>
+    </div>
+  </header>
+
+	<main>
+  <!-- Project Hero -->
+  <section class="project-hero">
+    <img src="/media/laimer_heatandsweat_01.jpg" alt="Project hero image">
+    <div class="project-info">
+      <div class="info-top">
+        <h1>HEAT &<br>SWEAT</h1>
+        <br>
+        <h2>
+Design research exploration dealing with sweat and heat regulation on feet. The artistic results should serve as a starting point for potential footwear concepts.
+        </h2>
+      </div>
+
+      <!-- keep the caption + meta below -->
+      <p class="project-caption">
+        2023<br>
+        Konstfack University of Arts, Crafts and Design<br>
+        Duration: six months<br><br>
+       Creative design exploration, Ecoliteracy principles, Innovation design, Vernissage, Space-time relation, Sustainable development goals, Prototype building, Fabric processing, Casting silicone
+      </p>
+    </div>
+  </section>
+</main>
+
+
+</div>
+  </section>
+	<footer class="project-nav">
+  <nav class="project-links">
+    <a href="/project_onrunning/">On Running</a>
+    <a href="/project_rapidautografting/">Rapid Autografting</a>
+    <a href="/project_atomic/">Atomic Ski</a>
+    <a href="/project_heatandsweat/" class="active">Heat & Sweat</a>
+    <a href="/project_grubslippers/">Grub Slippers</a>
+    <a href="/project_flori/">Medication Trolley</a>
+    <a href="/project_hangercollapse/">Hanger Collapse</a>
+    <a href="/project_multiframe/">Multi Frame</a>
+    <a href="/project_tensoralamp/">Tensora Lamp</a>
+    <a href="/project_wolfhaus/">Wolfhaus Booth</a>
+    <a href="/project_voglauer/">Voglauer Hotel</a>
+    <a href="/project_trailrunning/">Ultra Trail</a>
+  </nav>
+</footer>
+</body>
+</html>
