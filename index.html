@@ -31,6 +31,19 @@
   background: #000;   /* black background */
   color: #fff;        /* white text */
 }
+	/* Global link style (site-wide) */
+a {
+  color: #000;                       /* black */
+  text-decoration: none;             /* no underline */
+  transition: color 0.2s ease;       /* subtle fade */
+}
+a:hover {
+  color: rgba(0,0,0,0.6);            /* ~80% black on hover */
+}
+/* Keep visited links from turning purple */
+a:visited {
+  color: #000;
+}
 p {
   margin: 0 0 0px;  /* equal bottom spacing between paragraphs */
 }
