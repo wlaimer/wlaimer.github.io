@@ -140,18 +140,20 @@ a:visited { color: #000; }
 /* Brand fades too */
 .brand { color:#000; transition: color .2s ease; }
 .brand:hover { color: rgba(0,0,0,.6); }
-/* Additional project content */
-.project-content {
-  max-width: 1000px;
-  margin: 80px auto;      /* distance from hero above + center horizontally */
-  padding: 0 20px;
+	
+/* Two images side by side */
+.image-row {
+  display: flex;
+  gap: 20px;
 }
 
-.project-content img {
-  width: 50%;
+.image-row img {
+  flex: 1;                /* equal width split */
   border-radius: 12px;
   object-fit: cover;
 }
+
+	
 /* Ensure nav + footer lists don't lock color on hover */
 .links a,
 .project-links a {
@@ -208,6 +210,7 @@ a:visited { color: #000; }
 		  <!-- Additional content starts here -->
   <section class="project-content">
     <img src="/media/laimer_onrunning_02.jpg" alt="Additional project image">
+	     <img src="/media/laimer_onrunning_02.jpg" alt="Additional project image">
   </section>
 		
 </main>
