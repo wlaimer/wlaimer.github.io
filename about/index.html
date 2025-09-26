@@ -202,8 +202,8 @@ a:focus-visible {
 
 .logo-strip {
   max-width: 1200px;
-  margin: 20px auto 10px;
-  padding: 20px 0px;
+  margin: 20px auto 20px;
+  padding: 8px 8px;
   text-align: center;
 }
 
@@ -231,11 +231,11 @@ a:focus-visible {
 	/* Mobile: tighten logo grid */
 @media (max-width: 768px) {
   .logo-strip {
-    padding: 0 8px;   /* was 20px – reduce side padding */
+    padding: 0 0px;   /* was 20px – reduce side padding */
   }
 
   .logos {
-    gap: 8px;        /* was 24px – smaller gap between logos */
+    gap: 10px;        /* was 24px – smaller gap between logos */
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     /* logos can now shrink smaller, so more fit in one row */
   }
