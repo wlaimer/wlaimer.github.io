@@ -199,51 +199,6 @@ a:focus-visible {
     margin-left: 0;
   }
 }
-
-.logo-strip {
-  max-width: 1200px;
-  margin: 30px auto 30px;
-  padding: 8px 8px;
-  text-align: center;
-}
-
-.logo-intro {
-  font-size: 8pt;
-  margin-bottom: 16px;
-}
-
-.logos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 18px;
-  align-items: center;
-  justify-items: center;
-}
-
-/* Make PNG logos uniform + monochrome */
-.logo-img {
-  height: 24px; 
-  width: auto;
-  display: block;
-	  filter: none; /* keep them black in light mode */
-}
-
-	/* Mobile: tighten logo grid */
-@media (max-width: 768px) {
-  .logo-strip {
-    padding: 0 0px;   /* was 20px – reduce side padding */
-  }
-
-  .logos {
-    gap: 14px;        /* was 24px – smaller gap between logos */
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    /* logos can now shrink smaller, so more fit in one row */
-  }
-
-  .logo-img {
-    height: 24px;     /* slightly smaller so more fit */
-  }
-}
 	
   </style>
 </head>
@@ -388,18 +343,6 @@ an interdisciplinary designer working at the intersection of design, technology,
   <p><a href="https://www.linkedin.com/in/wolfgang-laimer/" target="_blank">LinkedIn</a></p>
 </section>
 	  
-<section class="logo-strip">
-
-  <div class="logos">
-  		  <img class="logo-img" src="/media/laimer_logo_on.png" alt="On">
-	      <img class="logo-img" src="/media/laimer_logo_atomic.png" alt="atomic">
-	      <img class="logo-img" src="/media/laimer_logo_ortovox.png" alt="ortovox">
-	      <img class="logo-img" src="/media/laimer_logo_taeby.png" alt="taeby">
-	      <img class="logo-img" src="/media/laimer_logo_wolfhaus.png" alt="wolfhaus">
-	      <img class="logo-img" src="/media/laimer_logo_voglauer.png" alt="voglauer">
-
-  </div>
-</section>
   </main>
 </body>
 </html>
