@@ -199,6 +199,42 @@ a:focus-visible {
     margin-left: 0;
   }
 }
+
+.logo-strip {
+  max-width: 1000px;
+  margin: 60px auto 40px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.logo-intro {
+  font-size: 8pt;
+  margin-bottom: 16px;
+}
+
+.logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 24px;
+  align-items: center;
+  justify-items: center;
+}
+
+/* Make PNG logos uniform + monochrome */
+.logo-img {
+  height: 28px; 
+  width: auto;
+  display: block;
+  filter: grayscale(1) brightness(0); /* forces them to solid black */
+}
+
+/* Dark mode → invert to white */
+@media (prefers-color-scheme: dark) {
+  .logo-img {
+    filter: invert(1) grayscale(1) brightness(1.2);
+  }
+}
+	
   </style>
 </head>
 <body>
@@ -341,7 +377,20 @@ an interdisciplinary designer working at the intersection of design, technology,
   <p><a href="https://www.instagram.com/_woifei" target="_blank">Instagram (Ultra-Trail)</a></p>
   <p><a href="https://www.linkedin.com/in/wolfgang-laimer/" target="_blank">LinkedIn</a></p>
 </section>
+	  
+<section class="logo-strip">
+  <p class="logo-intro">Selected collaborations (professional & academic projects)</p>
 
+  <div class="logos">
+  		  <img class="logo-img" src="/media/laimer_logo_on.png" alt="On">
+	      <img class="logo-img" src="/media/laimer_logo_atomic.png" alt="atomic">
+	      <img class="logo-img" src="/media/laimer_logo_ortovox.png" alt="ortovox">
+	      <img class="logo-img" src="/media/laimer_logo_taeby.png" alt="taeby">
+	      <img class="logo-img" src="/media/laimer_logo_wolfhaus.png" alt="wolfhaus">
+	      <img class="logo-img" src="/media/laimer_logo_voglauer.png" alt="voglauer">
+
+  </div>
+</section>
   </main>
 </body>
 </html>
