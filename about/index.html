@@ -225,13 +225,13 @@ a:focus-visible {
   height: 28px; 
   width: auto;
   display: block;
-  filter: grayscale(1) brightness(0); /* forces them to solid black */
+	  filter: none; /* keep them black in light mode */
 }
 
-/* Dark mode → invert to white */
+/* Dark mode: force them white */
 @media (prefers-color-scheme: dark) {
   .logo-img {
-    filter: invert(1) grayscale(1) brightness(1.2);
+    filter: invert(1) grayscale(1) brightness(1.25) contrast(1.2) !important;
   }
 }
 	
