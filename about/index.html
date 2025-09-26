@@ -227,6 +227,23 @@ a:focus-visible {
   display: block;
 	  filter: none; /* keep them black in light mode */
 }
+
+	/* Mobile: tighten logo grid */
+@media (max-width: 768px) {
+  .logo-strip {
+    padding: 0 8px;   /* was 20px – reduce side padding */
+  }
+
+  .logos {
+    gap: 12px;        /* was 24px – smaller gap between logos */
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    /* logos can now shrink smaller, so more fit in one row */
+  }
+
+  .logo-img {
+    height: 24px;     /* slightly smaller so more fit */
+  }
+}
 	
   </style>
 </head>
