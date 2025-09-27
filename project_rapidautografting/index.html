@@ -217,6 +217,35 @@ a:visited { color: #000; }
 .project-links a:hover {
   color: rgba(0,0,0,.6);
 }
+
+/* simple lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;              /* hidden by default */
+  place-items: center;        /* centers the image */
+  background: rgba(0,0,0,.85);
+  padding: 24px;
+  z-index: 2000;              /* above header */
+}
+.lightbox.open { display: grid; }
+
+.lightbox img {
+  max-width: min(96vw, 1600px);
+  max-height: 90vh;
+  border-radius: 12px;        /* matches your cards */
+  background: #fff;           /* for transparent PNG/SVG */
+  object-fit: contain;
+}
+
+/* prevent page scroll when open */
+body.noscroll { overflow: hidden; }
+
+/* desktop-only: show zoom cursor; on phones we won't bind clicks */
+@media (min-width: 769px) {
+  .grid-gallery.zoomable .media img { cursor: zoom-in; }
+}
+	
 </style>
 </head>
 <body>
@@ -248,7 +277,7 @@ a:visited { color: #000; }
       </div>
 
       <!-- keep the caption + meta below -->
-      <p class="project-caption">
+      <p class="project-caption zoomable">
         2024<br>
         Konstfack University of Arts, Crafts and Design<br>
         Duration: six months<br><br>
@@ -259,7 +288,7 @@ a:visited { color: #000; }
 
 <section class="project-content">
 
-<div class="grid-gallery cols-3 contain-all" style="--maxw:1200px; --bars-bg:#f0f0f0;">
+<div class="grid-gallery cols-3 contain-all zoomable" style="--maxw:1200px; --bars-bg:#f0f0f0;">
     <article class="grid-item">
       <div class="media">
         <img src="/media/laimer_rapidautografting_06.svg" alt="Concept 01">
@@ -478,5 +507,52 @@ www.interdependence.polimi.it </article>
     <a href="/project_trailrunning/">Ultra Trail</a>
   </nav>
 </footer>
+	<!-- minimal lightbox root -->
+<div class="lightbox" id="lb"><img alt=""></div>
+	<script>
+(() => {
+  const overlay = document.getElementById('lb');
+  const bigImg  = overlay.querySelector('img');
+  const desktop = window.matchMedia('(min-width: 769px)');
+
+  function bindDesktopZoom() {
+    // Only grids you mark as .zoomable will have this behavior
+    document.querySelectorAll('.grid-gallery.zoomable .media img').forEach(img => {
+      if (img.dataset._zoomBound) return;     // avoid double-binding
+      img.dataset._zoomBound = '1';
+      img.addEventListener('click', () => {
+        if (!desktop.matches) return;         // disabled on phone
+        bigImg.src = img.dataset.full || img.currentSrc || img.src;
+        overlay.classList.add('open');
+        document.body.classList.add('noscroll');
+      });
+    });
+  }
+
+  // Close when clicking outside the image (the backdrop)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      document.body.classList.remove('noscroll');
+      bigImg.src = '';
+    }
+  });
+
+  // Optional: Esc to close (desktop)
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      overlay.click();
+    }
+  });
+
+  // Initial bind + rebind on resize breakpoint changes
+  bindDesktopZoom();
+  desktop.addEventListener('change', () => {
+    // Nothing to do on shrink; clicks won’t open when not matching
+    // On grow to desktop, ensure any new images are bound
+    if (desktop.matches) bindDesktopZoom();
+  });
+})();
+</script>
 </body>
 </html>
