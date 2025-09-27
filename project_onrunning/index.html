@@ -139,8 +139,9 @@ a:visited { color: #000; }
 .brand:hover { color: rgba(0,0,0,.6); }
 	
 .project-content {
-  max-width: 1600px;
-  margin: 80px auto;   /* spacing below hero */
+  --content-max: 1000px;   /* default site-wide */
+  max-width: var(--content-max);
+  margin: 80px auto;
   padding: 0 20px;
 }
 
@@ -255,7 +256,7 @@ a:visited { color: #000; }
 
 
 <section class="project-content">
-  <div class="grid-gallery cols-3" style="--maxw: 1000px;">
+  <div class="grid-gallery cols-3" style="--maxw: 1600px;">
     <article class="grid-item">
       <div class="media">
         <img src="/media/laimer_onrunning_02.jpg" alt="Concept 01">
