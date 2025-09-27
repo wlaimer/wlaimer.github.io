@@ -143,6 +143,8 @@ a:visited { color: #000; }
   --cols: 3;                 /* default columns */
   --gap: 20px;               /* gap between cards */
   --maxw: 100%;            /* total grid width (matches your page) */
+  --object-fit: cover;
+ --bars-bg: #f0f0f0;
 
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
@@ -165,12 +167,14 @@ a:visited { color: #000; }
   aspect-ratio: 4 / 5;       /* keeps strict portrait ratio */
   overflow: hidden;
   border-radius: 12px;
+  background: var(--bars-bg);   /* the grey bars fill */
+
 }
 .grid-item .media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  object-fit: var(--object-fit);
+  object-position: center center; /* always centered */
 }
 
 /* caption under image, left-aligned */
@@ -183,6 +187,13 @@ a:visited { color: #000; }
   text-align: left;
 }
 
+/* UTILITIES */
+/* Per-image: force no-crop, show full image with grey bars */
+.fit-contain { --object-fit: contain; }
+
+/* Per-grid: make every image in this grid use contain */
+.grid-gallery.contain-all { --object-fit: contain; }
+	
 /* phone: 1 column, full-width image, caption under it */
 @media (max-width: 768px) {
   .grid-gallery,
