@@ -193,10 +193,12 @@ a:visited { color: #000; }
 
 /* phone: 1 column, full-width image, caption under it */
 @media (max-width: 768px) {
-  .grid-gallery {
+  .grid-gallery,
+  .grid-gallery.cols-3,
+  .grid-gallery.cols-4 {
     --cols: 1;
     gap: 16px;
-    padding: 0 16px;         /* match your mobile padding */
+    padding: 0 16px; /* keep your mobile padding */
   }
 }
 	
