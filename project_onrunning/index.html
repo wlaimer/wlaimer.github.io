@@ -144,20 +144,59 @@ a:visited { color: #000; }
   padding: 0 20px;
 }
 
-/* Two images side by side */
-.image-row {
-  display: flex;
-	 justify-content: center; /* keeps the pair centered in the page */
-  gap: 20px;
-  max-width: 1000px;   /* same width container as hero section */
-  margin: 40px auto;      /* centers the row horizontally */
+/* --- Flexible project grid --- */
+.grid-gallery {
+  /* tweak per section via inline style or modifier class */
+  --cols: 3;                 /* default columns */
+  --gap: 20px;               /* gap between cards */
+  --maxw: 1000px;            /* total grid width (matches your page) */
+
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gap);
+  max-width: var(--maxw);
+  margin: 40px auto;         /* centers the grid */
+  padding: 0 20px;           /* align with page padding */
 }
 
-.image-row img {
-  width: 50%;              /* each = half of 1000px = 500px */
+.grid-gallery.cols-3 { --cols: 3; }
+.grid-gallery.cols-4 { --cols: 4; }
+
+/* single card */
+.grid-item { display: flex; flex-direction: column; }
+
+/* 4:5 portrait media */
+.grid-item .media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;       /* keeps strict portrait ratio */
+  overflow: hidden;
   border-radius: 12px;
+}
+.grid-item .media img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* caption under image, left-aligned */
+.grid-item .caption {
+  font-size: 8pt;            /* matches your small text */
+  line-height: 1.5;
+  margin-top: 8px;
+  max-width: 38ch;           /* comfy line-length; remove if not needed */
+  color: #000;
+  text-align: left;
+}
+
+/* phone: 1 column, full-width image, caption under it */
+@media (max-width: 768px) {
+  .grid-gallery {
+    --cols: 1;
+    gap: 16px;
+    padding: 0 16px;         /* match your mobile padding */
+  }
 }
 	
 /* Ensure nav + footer lists don't lock color on hover */
@@ -213,15 +252,45 @@ a:visited { color: #000; }
       </p>
     </div>
 	    </section>
-		  <!-- Additional content starts here -->
+
+
 <section class="project-content">
-  <div class="image-row">
-    <img src="/media/laimer_onrunning_02.jpg" alt="Additional image 1">
-    <img src="/media/laimer_onrunning_02.jpg" alt="Additional image 2">
+  <div class="grid-gallery cols-3" style="--maxw: 1000px;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_onrunning_02.jpg" alt="Concept 01">
+      </div>
+      <p class="caption">
+       Inline Projects SS27–FW28 & LA28<br>
+		  <br>
+Supported footwear projects with early-stage exploration, redeveloping midsole geometries and upper concepts. Delivered design solutions, tech packs, and collaborated closely with developers, CM designers, product managers, and sport scientists on key products.
+      </p>
+    </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_onrunning_02.jpg" alt="Concept 02">
+      </div>
+      <p class="caption">
+        Footwear Knowledge<br>
+		  <br>
+Deepened understanding of footwear construction, development, and production through cross-functional collaboration. Strengthened overall design skills, learning workflows from exceptionally skilled colleagues, and building testable prototypes in the workshop.
+      </p>
+    </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_onrunning_02.jpg" alt="Concept 03">
+      </div>
+      <p class="caption">
+        Personal Project<br>
+		  <br>
+Led an innovation project focused on a distinct running sensation, combining physical prototypes with digital tools. Explored three running categories and developed coherent concepts for each, supported by testing, visuals, and a final presentation.
+      </p>
+    </article>
   </div>
 </section>
 		
-</main>
 
 	
 
