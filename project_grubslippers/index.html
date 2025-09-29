@@ -205,12 +205,22 @@ a:visited { color: #000; }
   }
 }
 	
-/* Modifier: switch whole box to landscape */
-.grid-item.landscape .media {
-  aspect-ratio: 5 / 4;   /* wide box */
+/* Default portrait cards (already in your CSS): 4/5 */
+.grid-item .media {
+  aspect-ratio: 4 / 5;
 }
+
+/* Landscape: same height, but wider by spanning 2 columns */
+.grid-item.landscape {
+  grid-column: span 2;       /* take up 2 columns */
+}
+
+.grid-item.landscape .media {
+  aspect-ratio: 5 / 4;       /* box is wide */
+}
+
 .grid-item.landscape .media img {
-  object-fit: cover;     /* fill the box nicely */
+  object-fit: cover;
   object-position: center;
 }
 	
