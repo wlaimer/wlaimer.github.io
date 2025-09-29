@@ -204,7 +204,19 @@ a:visited { color: #000; }
     padding: 0 16px; /* keep your mobile padding */
   }
 }
+	
+/* Special case: landscape format inside portrait slot */
+.grid-item.landscape .media {
+  aspect-ratio: 4 / 5; /* keep same height as the others */
+}
 
+.grid-item.landscape .media img {
+  aspect-ratio: 5 / 4;   /* image itself is horizontal */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* show full image, bars on top/bottom */
+  background: var(--bars-bg);
+}
 	
 /* Ensure nav + footer lists don't lock color on hover */
 .links a,
@@ -304,10 +316,10 @@ Shaped through an iterative process of physical modeling, photographs, sketching
 </p>
 	</article>
 
-    <article class="grid-item">
-      <div class="media">
-        <img src="/media/laimer_grubslippers_04.jpg" alt="Concept 03">
-      </div>
+<article class="grid-item landscape">
+  <div class="media">
+    <img src="/media/laimer_grubslippers_04.jpg" alt="Concept 03">
+  </div>
       <p class="caption">
         AI Collaboration<br>
 		  <br>
