@@ -8,7 +8,7 @@
 <!-- Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
 <!-- Favicon -->
-<link rel="icon" href="/media/laimer_favicon_01.png" type="image/x-icon">
+<link rel="icon" href="/media/laimer_favicon_01.png" type="image/png">
 
 <style>
   body {
@@ -40,8 +40,8 @@
     padding: 0 80px 0 50px;
   }
   .nav-inner { width: 100%; display: flex; align-items: center; justify-content: space-between; }
-.brand { font-weight: 800; font-size: 11pt; text-transform: uppercase; line-height: 1.2; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
-	.links { display: flex; gap: 20px; }
+  .brand { font-weight: 800; font-size: 11pt; text-transform: uppercase; line-height: 1.2; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .links { display: flex; gap: 20px; }
   .links a { text-decoration: none; color: #000; font-size: 9pt; font-weight: normal; }
   .links a.active { font-weight: bold; }
 
@@ -67,7 +67,7 @@
   .project-caption { font-size: 9pt; margin-top: auto; margin-bottom: 30px; max-width: 300px; }
 
 main {
-  padding-bottom: 200px;  /* creates white space after your content */
+  padding-bottom: 100px;  /* creates white space after your content */
 }
 	
 .project-nav {
@@ -137,6 +137,75 @@ a:visited { color: #000; }
 .brand { color:#000; transition: color .2s ease; }
 .brand:hover { color: rgba(0,0,0,.6); }
 
+/* --- Flexible project grid --- */
+.grid-gallery {
+  /* tweak per section via inline style or modifier class */
+  --cols: 3;                 /* default columns */
+  --gap: 20px;               /* gap between cards */
+  --maxw: 100%;            /* total grid width (matches your page) */
+  --object-fit: cover;
+ --bars-bg: #f0f0f0;
+
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gap);
+  max-width: var(--maxw);
+  margin: 120px auto 120px;         /* centers the grid */
+  padding: 0 20px;           /* align with page padding */
+}
+
+.grid-gallery.cols-3 { --cols: 3; }
+.grid-gallery.cols-4 { --cols: 4; }
+
+/* single card */
+.grid-item { display: flex; flex-direction: column; }
+
+/* 4:5 portrait media */
+.grid-item .media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;       /* keeps strict portrait ratio */
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bars-bg);   /* the grey bars fill */
+
+}
+.grid-item .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--object-fit);
+  object-position: center center; /* always centered */
+}
+
+/* caption under image, left-aligned */
+.grid-item .caption {
+  font-size: 8pt;            /* matches your small text */
+  line-height: 1.5;
+  margin-top: 20px;
+  max-width: 46ch;           /* comfy line-length; remove if not needed */
+  color: #000;
+  text-align: left;
+}
+
+/* UTILITIES */
+/* Per-image: force no-crop, show full image with grey bars */
+.fit-contain { --object-fit: contain; }
+
+/* Per-grid: make every image in this grid use contain */
+.grid-gallery.contain-all { --object-fit: contain; }
+	
+/* phone: 1 column, full-width image, caption under it */
+@media (max-width: 768px) {
+  .grid-gallery,
+  .grid-gallery.cols-3,
+  .grid-gallery.cols-4 {
+    --cols: 1;
+    gap: 16px;
+    padding: 0 16px; /* keep your mobile padding */
+  }
+}
+
+	
 /* Ensure nav + footer lists don't lock color on hover */
 .links a,
 .project-links a {
@@ -148,6 +217,30 @@ a:visited { color: #000; }
 .project-links a:hover {
   color: rgba(0,0,0,.6);
 }
+
+/* simple lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;              /* hidden by default */
+  place-items: center;        /* centers the image */
+  background: rgba(0,0,0,.85);
+  padding: 24px;
+  z-index: 2000;              /* above header */
+}
+.lightbox.open { display: grid; }
+
+.lightbox img {
+  max-width: min(96vw, 1600px);
+  max-height: 90vh;
+  border-radius: 12px;        /* matches your cards */
+  background: #fff;           /* for transparent PNG/SVG */
+  object-fit: contain;
+}
+
+/* prevent page scroll when open */
+body.noscroll { overflow: hidden; }
+	
 </style>
 </head>
 <body>
@@ -187,6 +280,225 @@ a:visited { color: #000; }
       </p>
     </div>
   </section>
+
+<section class="project-content">
+
+	<div class="grid-gallery cols-4 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_flori_02.jpg" alt="Concept 01">
+      </div>
+      <p class="caption">
+       Designing for Healthcare Futures<br>
+		  <br>
+How can a medication trolley reduce workload and improve efficiency, hygiene, and sustainability? How do nursing workflows inform user-friendly trolley design? What processes can be automated to reduce the stress of care staff? How can interconnected systems improve our healthcare? </p> 
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_flori_03.jpg" alt="Concept 02">
+      </div>
+      <p class="caption">
+        Status Quo<br>
+		  <br>
+Nurses in hospitals were observed and interviewed while using trolleys in their work Key issues include overstocking, limited cleaning, and difficulty maneuvering. Future designs should balance mobility, capacity, and ease of use.</p>    
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_flori_03.jpg" alt="Concept 03">
+      </div>
+      <p class="caption">
+        Quantitative Survey<br>
+		  <br>
+A detailed quantitative survey of medication trolleys with 157 nurses was conducted online. The survey gathered information on important features, issues, and potential improvements.</p> 
+	</article>
+	  
+<article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_flori_04.jpg" alt="Concept 04">
+      </div>
+      <p class="caption">
+       Medical Materials<br>
+		  <br>
+Most trolleys are heavily stocked with items of various sizes and shapes, making organization difficult. Clear structure is rarely seen, which hinders finding specific items, especially under time pressure. Restocking the material takes up an enormous amount of time.</p>
+</article>
+</div>
+	
+
+<div class="grid-gallery cols-4 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_02.jpg" alt="Concept 01">
+      </div>
+      <p class="caption">
+       Material and Concept Exploration<br>
+		  <br>
+Investigating collagen, keratin, gelatin, and other materials, experimenting with various application methods for optimal customization.  </p>
+    </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_03.jpg" alt="Concept 02">
+      </div>
+      <p class="caption">
+        Relations of Aesthetic Signs<br>
+		  <br>
+Research revealed aesthetic connections among materials that inspired the design: Similarities between shoe lasts/meat/skin, mesh/stockings and cheese/calluses.   </p>
+    </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_04.jpg" alt="Concept 03">
+      </div>
+      <p class="caption">
+        Design Development<br>
+		  <br>
+The concept enhances the natural anatomy with heel cushioning and two front paws. The additional bone structure improves stability and force return.
+      </p>
+    </article>
+	  
+<article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_05.jpg" alt="Concept 04">
+      </div>
+      <p class="caption">
+        3D Modeling and Prototyping<br>
+		  <br>
+3D scanning, digital modeling, and 3D printing models with stretchable mesh and latex, filled with a custom gelatin blend.      </p>
+    </article>
+</div>
+
+<div class="grid-gallery cols-4 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_09.jpg" alt="Concept 01">
+      </div>
+      <p class="caption">
+       Final Prototypes<br>
+		  <br>
+The last was adjusted to match the original feet, ensuring a precise fit. Smaller details, separation lines and mesh structures were refined. </p>    
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_10.jpg" alt="Concept 02">
+      </div>
+      <p class="caption">
+        Concept Procedure<br>
+		  <br>
+The process includes collecting biomaterial samples, bioprinting custom-fit skins, and injecting cushioning. Users wear the enhancements temporarily, allowing their bodies to physical connect with it. </p>    
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_11.jpg" alt="Concept 03">
+      </div>
+      <p class="caption">
+        Bioreactor<br>
+		  <br>
+The bioreactor represents the future of personalized biological enhancements and serves as a storytelling element to immerse you in this future.      </p>
+    </article>
+	  
+<article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_12.jpg" alt="Concept 04">
+      </div>
+      <p class="caption">
+        Design Scenario<br>
+		  <br>
+A future design scenario for 20XX envisions biotechnology integrated into everyday life. Personalized bioproducts and customized body enhancements empower individuals to take control of their bodies. </p>   
+</article>
+</div>
+	
+<div class="grid-gallery cols-3 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_13.jpg" alt="Concept 01">
+      </div>
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_14.jpg" alt="Concept 02">
+      </div>  
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_15.jpg" alt="Concept 03">
+      </div>
+    </article>
+</div>
+	
+<div class="grid-gallery cols-3 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_16.jpg" alt="Concept 01">
+      </div>
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_17.jpg" alt="Concept 02">
+      </div>  
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_18.jpg" alt="Concept 03">
+      </div>
+    </article>
+</div>
+
+	<div class="grid-gallery cols-4 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_19.jpg" alt="Concept 01">
+      </div>
+      <p class="caption">
+       Scholarship: Konstfack Foundation for meritorious students. Financial award for honorable students.<br>
+		  <br>
+Scholarship: Beata Brummer & Ulla Fröberg Cramér Foundation. Financial award for projects that promise high artistic quality.
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_20.jpg" alt="Concept 02">
+      </div>
+      <p class="caption">
+        Sweden’s largest national television channel SVT covered the Konstfack spring exhibition, featuring this project
+in the news programme.<br>
+		  <br>
+www.svt.se/kultur/konstfacks-varutstallning-skon-ska-vaxa-ihop-med-huden </p>    
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_21.jpg" alt="Concept 03">
+      </div>
+      <p class="caption">
+        The project is currently featured in the exhibition 'Hyper Human' at the National Museum of Science and Technology in Stockholm. It was also showcased in the exhibition 'Interdependence' at the Milano Design Week.<br>
+		  <br>
+www.tekniskamuseet.se/en/discover/exhibitions/hyper-human <br>
+www.interdependence.polimi.it    </article>
+	  
+<article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_rapidautografting_22.jpg" alt="Concept 04">
+      </div>
+      <p class="caption">
+        iF Design Student Award 2025 Winner from around 7000 entries. Global Footwear Award 2024 Overall Winner, Core77 Design Award 2025 Notable. FIT Sport Design Award 2025<br>
+		  <br>
+www.globalfootwearawards.com<br>
+www.ifdesign.com<br>
+core77designawards.awardsplatform.com<br>
+www.fitdesignawards.com <br>
+www.interdependence.polimi.it </article>
+</div>
+	
+  </section>
+		
 </main>
 
 	<footer class="project-nav">
