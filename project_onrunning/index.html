@@ -67,7 +67,7 @@
   .project-caption { font-size: 9pt; margin-top: auto; margin-bottom: 30px; max-width: 300px; }
 
 main {
-  padding-bottom: 200px;  /* creates white space after your content */
+  padding-bottom: 100px;  /* creates white space after your content */
 }
 	
 .project-nav {
@@ -123,7 +123,6 @@ main {
   .project-info h1 { font-size: 20pt; }
   .project-info h2 { font-size: 12pt; max-width: 100%; }
   .project-caption { font-size: 8pt; margin-bottom: 20px; }
-	
 }
 /* --- Link fade (site-wide) — place LAST --- */
 a {
@@ -137,13 +136,6 @@ a:visited { color: #000; }
 /* Brand fades too */
 .brand { color:#000; transition: color .2s ease; }
 .brand:hover { color: rgba(0,0,0,.6); }
-	
-.project-content {
-  --content-max: 1800px;   /* default site-wide */
-  max-width: var(--content-max);
-  margin: 80px auto;
-  padding: 0 20px;
-}
 
 /* --- Flexible project grid --- */
 .grid-gallery {
@@ -151,12 +143,14 @@ a:visited { color: #000; }
   --cols: 3;                 /* default columns */
   --gap: 20px;               /* gap between cards */
   --maxw: 100%;            /* total grid width (matches your page) */
+  --object-fit: cover;
+ --bars-bg: #f0f0f0;
 
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
   gap: var(--gap);
   max-width: var(--maxw);
-  margin: 40px auto;         /* centers the grid */
+  margin: 120px auto 120px;         /* centers the grid */
   padding: 0 20px;           /* align with page padding */
 }
 
@@ -173,12 +167,14 @@ a:visited { color: #000; }
   aspect-ratio: 4 / 5;       /* keeps strict portrait ratio */
   overflow: hidden;
   border-radius: 12px;
+  background: var(--bars-bg);   /* the grey bars fill */
+
 }
 .grid-item .media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  object-fit: var(--object-fit);
+  object-position: center center; /* always centered */
 }
 
 /* caption under image, left-aligned */
@@ -191,6 +187,13 @@ a:visited { color: #000; }
   text-align: left;
 }
 
+/* UTILITIES */
+/* Per-image: force no-crop, show full image with grey bars */
+.fit-contain { --object-fit: contain; }
+
+/* Per-grid: make every image in this grid use contain */
+.grid-gallery.contain-all { --object-fit: contain; }
+	
 /* phone: 1 column, full-width image, caption under it */
 @media (max-width: 768px) {
   .grid-gallery,
@@ -201,6 +204,7 @@ a:visited { color: #000; }
     padding: 0 16px; /* keep your mobile padding */
   }
 }
+
 	
 /* Ensure nav + footer lists don't lock color on hover */
 .links a,
@@ -213,7 +217,32 @@ a:visited { color: #000; }
 .project-links a:hover {
   color: rgba(0,0,0,.6);
 }
+
+/* simple lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;              /* hidden by default */
+  place-items: center;        /* centers the image */
+  background: rgba(0,0,0,.85);
+  padding: 24px;
+  z-index: 2000;              /* above header */
+}
+.lightbox.open { display: grid; }
+
+.lightbox img {
+  max-width: min(96vw, 1600px);
+  max-height: 90vh;
+  border-radius: 12px;        /* matches your cards */
+  background: #fff;           /* for transparent PNG/SVG */
+  object-fit: contain;
+}
+
+/* prevent page scroll when open */
+body.noscroll { overflow: hidden; }
+	
 </style>
+	
 </head>
 <body>
   <!-- Navigation -->
@@ -249,19 +278,17 @@ a:visited { color: #000; }
         2025<br>
         On AG<br>
         Duration: six months<br><br>
-        Footwear innovation, performance-driven design, ideation and concept development,
-        3D modeling and prototyping, AI-assisted design, material exploration,
-        runner- and sport-science focused.
+        Footwear innovation, performance-driven design, ideation and concept development, 3D modeling and prototyping, AI-assisted design, material exploration, runner- and sport-science focused.
       </p>
     </div>
 	    </section>
 
 
 <section class="project-content">
-  <div class="grid-gallery cols-3" style="--maxw: 1800px;">
-    <article class="grid-item">
+<div class="grid-gallery cols-3 contain-all zoomable" style="--maxw:1200px; --bars-bg:#f0f0f0;">
+	<article class="grid-item">
       <div class="media">
-        <img src="/media/laimer_onrunning_02.jpg" alt="Concept 01">
+        <img src="/media/laimer_onrunning_03.jpg" alt="Concept 01">
       </div>
       <p class="caption">
        Inline Projects SS27–FW28 & LA28<br>
@@ -272,7 +299,7 @@ Supported footwear projects with early-stage exploration, redeveloping midsole g
 
     <article class="grid-item">
       <div class="media">
-        <img src="/media/laimer_onrunning_02.jpg" alt="Concept 02">
+        <img src="/media/laimer_onrunning_03.jpg" alt="Concept 02">
       </div>
       <p class="caption">
         Footwear Knowledge<br>
@@ -283,7 +310,7 @@ Deepened understanding of footwear construction, development, and production thr
 
     <article class="grid-item">
       <div class="media">
-        <img src="/media/laimer_onrunning_02.jpg" alt="Concept 03">
+        <img src="/media/laimer_onrunning_03.jpg" alt="Concept 03">
       </div>
       <p class="caption">
         Personal Project<br>
@@ -312,5 +339,52 @@ Led an innovation project focused on a distinct running sensation, combining phy
     <a href="/project_trailrunning/">Ultra Trail</a>
   </nav>
 </footer>
+		<!-- minimal lightbox root -->
+<div class="lightbox" id="lb"><img alt=""></div>
+	<script>
+(() => {
+  const overlay = document.getElementById('lb');
+  const bigImg  = overlay.querySelector('img');
+  const desktop = window.matchMedia('(min-width: 769px)');
+
+  function bindDesktopZoom() {
+    // Only grids you mark as .zoomable will have this behavior
+    document.querySelectorAll('.grid-gallery.zoomable .media img').forEach(img => {
+      if (img.dataset._zoomBound) return;     // avoid double-binding
+      img.dataset._zoomBound = '1';
+      img.addEventListener('click', () => {
+        if (!desktop.matches) return;         // disabled on phone
+        bigImg.src = img.dataset.full || img.currentSrc || img.src;
+        overlay.classList.add('open');
+        document.body.classList.add('noscroll');
+      });
+    });
+  }
+
+  // Close when clicking outside the image (the backdrop)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      document.body.classList.remove('noscroll');
+      bigImg.src = '';
+    }
+  });
+
+  // Optional: Esc to close (desktop)
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      overlay.click();
+    }
+  });
+
+  // Initial bind + rebind on resize breakpoint changes
+  bindDesktopZoom();
+  desktop.addEventListener('change', () => {
+    // Nothing to do on shrink; clicks won’t open when not matching
+    // On grow to desktop, ensure any new images are bound
+    if (desktop.matches) bindDesktopZoom();
+  });
+})();
+</script>
 </body>
 </html>
