@@ -209,31 +209,25 @@ a:visited { color: #000; }
 .grid-gallery.ar-mixed {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  gap: var(--gap); /* keep your existing gap */
 }
 
-/* Default portrait cards = 4:5, span 2 units */
-.grid-gallery.ar-mixed .grid-item {
-  grid-column: span 2;
-}
-.grid-gallery.ar-mixed .grid-item .media {
-  aspect-ratio: 4 / 5;
-}
+/* Default portrait cards: span 2, 4:5 */
+.grid-gallery.ar-mixed .grid-item { grid-column: span 2; }
+.grid-gallery.ar-mixed .grid-item .media { aspect-ratio: 4 / 5; }
 
-/* Landscape cards = 5:4, span 3 units (same height, wider) */
-.grid-gallery.ar-mixed .grid-item.landscape {
-  grid-column: span 3;
-}
-.grid-gallery.ar-mixed .grid-item.landscape .media {
-  aspect-ratio: 5 / 4;
-}
+/* Landscape card: span 3, use 6:5 so HEIGHT matches portraits exactly */
+.grid-gallery.ar-mixed .grid-item.landscape { grid-column: span 3; }
+.grid-gallery.ar-mixed .grid-item.landscape .media { aspect-ratio: 6 / 5; }
+	
+/* Ensure images fill their boxes consistently */
 .grid-gallery.ar-mixed .grid-item .media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
 }
 
-/* Mobile: fall back to single column */
+/* (Mobile stays 1 column – keep them all 4/5 if you want consistency) */
 @media (max-width: 768px) {
   .grid-gallery.ar-mixed {
     grid-template-columns: 1fr;
@@ -244,18 +238,8 @@ a:visited { color: #000; }
   }
   .grid-gallery.ar-mixed .grid-item .media,
   .grid-gallery.ar-mixed .grid-item.landscape .media {
-    aspect-ratio: 4 / 5; /* or keep 5/4 if you prefer on mobile */
+    aspect-ratio: 4 / 5;
   }
-}
-/* Force landscape cards to match the row height of portraits */
-.grid-gallery.ar-mixed .grid-item.landscape .media {
-  aspect-ratio: auto;     /* disable aspect ratio calc */
-  height: 100%;           /* take full row height */
-}
-.grid-gallery.ar-mixed .grid-item.landscape .media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;      /* fills box cleanly */
 }
 
 /* Ensure nav + footer lists don't lock color on hover */
