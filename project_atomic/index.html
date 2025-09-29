@@ -8,7 +8,7 @@
 <!-- Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
 <!-- Favicon -->
-<link rel="icon" href="/media/laimer_favicon_01.png" type="image/x-icon">
+<link rel="icon" href="/media/laimer_favicon_01.png" type="image/png">
 
 <style>
   body {
@@ -26,19 +26,6 @@
 ::selection {
   background: #000;   /* black background */
   color: #fff;        /* white text */
-}
-	/* Global link style (site-wide) */
-a {
-  color: #000;                       /* black */
-  text-decoration: none;             /* no underline */
-  transition: color 0.2s ease;       /* subtle fade */
-}
-a:hover {
-  color: rgba(0,0,0,0.6);            /* ~80% black on hover */
-}
-/* Keep visited links from turning purple */
-a:visited {
-  color: #000;
 }
   /* Navigation */
   .nav {
@@ -79,28 +66,8 @@ a:visited {
   .project-info h2 { font-size: 15pt; margin: 10px 0 0; max-width: 450px; line-height: 1.3; }
   .project-caption { font-size: 9pt; margin-top: auto; margin-bottom: 30px; max-width: 300px; }
 
-/* Nav links – allow subtle hover fade */
-.links a {
-  color: #000;
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.links a:hover {
-  color: rgba(0,0,0,.6);
-}
-
-/* Bottom project list – allow subtle hover fade */
-.project-links a {
-  color: #000;
-  text-decoration: none;
-  transition: color .2s ease;
-}
-.project-links a:hover {
-  color: rgba(0,0,0,.6);
-}
-
 main {
-  padding-bottom: 200px;  /* creates white space after your content */
+  padding-bottom: 100px;  /* creates white space after your content */
 }
 	
 .project-nav {
@@ -157,7 +124,123 @@ main {
   .project-info h2 { font-size: 12pt; max-width: 100%; }
   .project-caption { font-size: 8pt; margin-bottom: 20px; }
 }
+/* --- Link fade (site-wide) — place LAST --- */
+a {
+  color: #000;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+a:hover { color: rgba(0,0,0,.6); }
+a:visited { color: #000; }
 
+/* Brand fades too */
+.brand { color:#000; transition: color .2s ease; }
+.brand:hover { color: rgba(0,0,0,.6); }
+
+/* --- Flexible project grid --- */
+.grid-gallery {
+  /* tweak per section via inline style or modifier class */
+  --cols: 3;                 /* default columns */
+  --gap: 20px;               /* gap between cards */
+  --maxw: 100%;            /* total grid width (matches your page) */
+  --object-fit: cover;
+ --bars-bg: #f0f0f0;
+
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gap);
+  max-width: var(--maxw);
+  margin: 120px auto 120px;         /* centers the grid */
+  padding: 0 20px;           /* align with page padding */
+}
+
+.grid-gallery.cols-3 { --cols: 3; }
+.grid-gallery.cols-4 { --cols: 4; }
+
+/* single card */
+.grid-item { display: flex; flex-direction: column; }
+
+/* 4:5 portrait media */
+.grid-item .media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;       /* keeps strict portrait ratio */
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bars-bg);   /* the grey bars fill */
+
+}
+.grid-item .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--object-fit);
+  object-position: center center; /* always centered */
+}
+
+/* caption under image, left-aligned */
+.grid-item .caption {
+  font-size: 8pt;            /* matches your small text */
+  line-height: 1.5;
+  margin-top: 20px;
+  max-width: 46ch;           /* comfy line-length; remove if not needed */
+  color: #000;
+  text-align: left;
+}
+
+/* UTILITIES */
+/* Per-image: force no-crop, show full image with grey bars */
+.fit-contain { --object-fit: contain; }
+
+/* Per-grid: make every image in this grid use contain */
+.grid-gallery.contain-all { --object-fit: contain; }
+	
+/* phone: 1 column, full-width image, caption under it */
+@media (max-width: 768px) {
+  .grid-gallery,
+  .grid-gallery.cols-3,
+  .grid-gallery.cols-4 {
+    --cols: 1;
+    gap: 16px;
+    padding: 0 16px; /* keep your mobile padding */
+  }
+}
+
+	
+/* Ensure nav + footer lists don't lock color on hover */
+.links a,
+.project-links a {
+  color:#000;
+  text-decoration:none;
+  transition: color .2s ease;
+}
+.links a:hover,
+.project-links a:hover {
+  color: rgba(0,0,0,.6);
+}
+
+/* simple lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;              /* hidden by default */
+  place-items: center;        /* centers the image */
+  background: rgba(0,0,0,.85);
+  padding: 24px;
+  z-index: 2000;              /* above header */
+}
+.lightbox.open { display: grid; }
+
+.lightbox img {
+  max-width: min(96vw, 1600px);
+  max-height: 90vh;
+  border-radius: 12px;        /* matches your cards */
+  background: #fff;           /* for transparent PNG/SVG */
+  object-fit: contain;
+}
+
+/* prevent page scroll when open */
+body.noscroll { overflow: hidden; }
+	
 </style>
 </head>
 <body>
@@ -197,8 +280,91 @@ main {
       </p>
     </div>
   </section>
-</main>
+		
+<section class="project-content">
+<div class="grid-gallery cols-4 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_atomic_02.jpg" alt="Concept 01">
+      </div>
+      <p class="caption">
+       Color, Materials, Finish<br>
+		  <br>
+Actively contributed to CMF development for future seasons by coordinating materials, matching colour shades across various components, and ensuring consistency across product range and packaging.</p> 
+	</article>
 
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_atomic_03.jpg" alt="Concept 02">
+      </div>
+      <p class="caption">
+        Packaging Design<br>
+		  <br>
+Analysed the existing packaging and developed new concepts and variations for cardboard boxes, wrapping paper, and ski stickers. Conducted print tests and mockups, ensuring adherence to CI guidelines.</p>
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_atomic_04.jpg" alt="Concept 03">
+      </div>
+      <p class="caption">
+        Footwear Design<br>
+		  <br>
+Created detailed vector tech packs and design guidelines for production, and developed and adapted technical design datasheets. All work was done in close coordination with the Head of Design and the respective product teams.</p>
+    </article>
+	  
+<article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_atomic_05.jpg" alt="Concept 04">
+      </div>
+      <p class="caption">
+        Physical and Digital Prototyping<br>
+		  <br>
+Defined break lines for future footwear designs and contributed to the redesign of soft and hard components. Converted physical prototypes into digital tech packs for production.</p>
+    </article>
+</div>
+<div class="grid-gallery cols-4 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_atomic_06.jpg" alt="Concept 01">
+      </div>
+      <p class="caption">
+       Sketch Development<br>
+		  <br>
+Early design sketches for creating a winter trainer in alignment with the Atomic line aesthetics. The design research phase was limited to two weeks. </p>
+    </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_atomic_07.jpg" alt="Concept 02">
+      </div>
+      <p class="caption">
+        Version Casual<br>
+		  <br>
+This is the proposal for the casual trainer variant. Images are vector renderings visualized in Illustrator. </p>
+    </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_atomic_08.jpg" alt="Concept 03">
+      </div>
+      <p class="caption">
+        Version Grip<br>
+		  <br>
+A variant featuring integrated socks and a high-top design for training in the snow.</p>
+    </article>
+	  
+<article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_atomic_09.jpg" alt="Concept 04">
+      </div>
+      <p class="caption">
+        Concept Visual<br>
+		  <br>
+This image was created as part of a later exploration process and is not affiliated with the Atomic brand or products.</p>
+    </article>
+</div>
+</main>
 
 </div>
   </section>
