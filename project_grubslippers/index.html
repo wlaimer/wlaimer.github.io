@@ -218,7 +218,6 @@ a:visited { color: #000; }
 
 /* Landscape card: span 3, use 6:5 so HEIGHT matches portraits exactly */
 .grid-gallery.ar-mixed .grid-item.landscape { grid-column: span 3; }
-.grid-gallery.ar-mixed .grid-item.landscape .media { aspect-ratio: 6 / 5; }
 	
 /* Ensure images fill their boxes consistently */
 .grid-gallery.ar-mixed .grid-item .media img {
@@ -227,6 +226,18 @@ a:visited { color: #000; }
   object-fit: cover;
 }
 
+/* Put this AFTER your current ar-mixed rules */
+.grid-gallery.ar-mixed .grid-item.landscape .media {
+  aspect-ratio: auto;  /* ignore ratio */
+  height: 100%;        /* fill the row height exactly */
+}
+.grid-gallery.ar-mixed .grid-item.landscape .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* or 'contain' if you prefer no crop */
+}
+
+	
 /* (Mobile stays 1 column – keep them all 4/5 if you want consistency) */
 @media (max-width: 768px) {
   .grid-gallery.ar-mixed {
