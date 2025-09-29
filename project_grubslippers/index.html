@@ -247,9 +247,17 @@ a:visited { color: #000; }
     aspect-ratio: 4 / 5; /* or keep 5/4 if you prefer on mobile */
   }
 }
+/* Force landscape cards to match the row height of portraits */
+.grid-gallery.ar-mixed .grid-item.landscape .media {
+  aspect-ratio: auto;     /* disable aspect ratio calc */
+  height: 100%;           /* take full row height */
+}
+.grid-gallery.ar-mixed .grid-item.landscape .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* fills box cleanly */
+}
 
-
-	
 /* Ensure nav + footer lists don't lock color on hover */
 .links a,
 .project-links a {
