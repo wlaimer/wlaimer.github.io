@@ -205,24 +205,50 @@ a:visited { color: #000; }
   }
 }
 	
-/* Default portrait cards (already in your CSS): 4/5 */
-.grid-item .media {
+/* Mixed aspect-ratio layout: 2+2+3 units = 7 units per row */
+.grid-gallery.ar-mixed {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+/* Default portrait cards = 4:5, span 2 units */
+.grid-gallery.ar-mixed .grid-item {
+  grid-column: span 2;
+}
+.grid-gallery.ar-mixed .grid-item .media {
   aspect-ratio: 4 / 5;
 }
 
-/* Landscape: same height, but wider by spanning 2 columns */
-.grid-item.landscape {
-  grid-column: span 2;       /* take up 2 columns */
+/* Landscape cards = 5:4, span 3 units (same height, wider) */
+.grid-gallery.ar-mixed .grid-item.landscape {
+  grid-column: span 3;
 }
-
-.grid-item.landscape .media {
-  aspect-ratio: 5 / 4;       /* box is wide */
+.grid-gallery.ar-mixed .grid-item.landscape .media {
+  aspect-ratio: 5 / 4;
 }
-
-.grid-item.landscape .media img {
+.grid-gallery.ar-mixed .grid-item .media img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
 }
+
+/* Mobile: fall back to single column */
+@media (max-width: 768px) {
+  .grid-gallery.ar-mixed {
+    grid-template-columns: 1fr;
+  }
+  .grid-gallery.ar-mixed .grid-item,
+  .grid-gallery.ar-mixed .grid-item.landscape {
+    grid-column: auto;
+  }
+  .grid-gallery.ar-mixed .grid-item .media,
+  .grid-gallery.ar-mixed .grid-item.landscape .media {
+    aspect-ratio: 4 / 5; /* or keep 5/4 if you prefer on mobile */
+  }
+}
+
+
 	
 /* Ensure nav + footer lists don't lock color on hover */
 .links a,
@@ -300,8 +326,8 @@ body.noscroll { overflow: hidden; }
   </section>
 
 <section class="project-content">
-<div class="grid-gallery cols-3 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
-    <article class="grid-item">
+<div class="grid-gallery cols-3 ar-mixed" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+  <article class="grid-item">
       <div class="media">
         <img src="/media/laimer_grubslippers_02.jpg" alt="Concept 01">
       </div>
