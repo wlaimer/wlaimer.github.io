@@ -207,16 +207,18 @@ aspect-ratio: auto;   /* drop fixed 4:5 ratio */
   }
 }
 	
-/* 7 columns: 2+2+3 layout */
 .grid-gallery.ar-mixed {
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  /* keep your existing gap */
 }
 
 .grid-gallery.ar-mixed .grid-item { grid-column: span 2; }
 .grid-gallery.ar-mixed .grid-item .media { aspect-ratio: 4 / 5; }   /* portraits keep 4:5 */
 
 .grid-gallery.ar-mixed .grid-item.landscape { grid-column: span 3; }
-.grid-gallery.ar-mixed .grid-item.landscape .media { aspect-ratio: 6 / 5; } /* matches portrait height */
+.grid-gallery.ar-mixed .grid-item.landscape .media {
+  aspect-ratio: 6 / 5 !important; /* 1.2 — matches 2 tracks @ 4:5 vs 3 tracks */
+}
 
 /* ensure images actually fill their boxes */
 .grid-gallery.ar-mixed .grid-item .media img {
@@ -226,6 +228,12 @@ aspect-ratio: auto;   /* drop fixed 4:5 ratio */
   object-fit: cover;
 }
 
+	/* Put this AFTER your existing generic .grid-item .media rule */
+.grid-gallery.ar-mixed .grid-item .media {
+  height: auto !important;        /* stop the stretch */
+  aspect-ratio: 4 / 5 !important; /* portraits keep 4:5 */
+}
+	
 /* Mobile: keep consistent 4:5 and 1 column */
 @media (max-width: 768px) {
   .grid-gallery.ar-mixed {
