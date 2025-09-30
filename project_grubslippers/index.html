@@ -145,7 +145,8 @@ a:visited { color: #000; }
   --maxw: 100%;            /* total grid width (matches your page) */
   --object-fit: cover;
  --bars-bg: #f0f0f0;
-
+	 
+  align-items: stretch; /* every grid cell same height */
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
   gap: var(--gap);
@@ -163,8 +164,8 @@ a:visited { color: #000; }
 /* 4:5 portrait media */
 .grid-item .media {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;       /* keeps strict portrait ratio */
+aspect-ratio: auto;   /* drop fixed 4:5 ratio */
+  height: 100%;         /* stretch to fill */
   overflow: hidden;
   border-radius: 12px;
   background: var(--bars-bg);   /* the grey bars fill */
@@ -173,7 +174,8 @@ a:visited { color: #000; }
 .grid-item .media img {
   width: 100%;
   height: 100%;
-  object-fit: var(--object-fit);
+  object-fit: cover;    /* keeps filling without distortion */
+  display: block;
   object-position: center center; /* always centered */
 }
 
