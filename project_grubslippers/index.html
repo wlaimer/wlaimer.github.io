@@ -207,30 +207,23 @@ aspect-ratio: auto;   /* drop fixed 4:5 ratio */
   }
 }
 	
-/* --- Equal media height on desktop --- */
+/* 7 columns: 2+2+3 layout */
 .grid-gallery.ar-mixed {
-  --media-h: 520px;            /* tweak this once to taste */
   grid-template-columns: repeat(7, 1fr);
-  align-items: start;
 }
 
 .grid-gallery.ar-mixed .grid-item { grid-column: span 2; }
+.grid-gallery.ar-mixed .grid-item .media { aspect-ratio: 4 / 5; }   /* portraits keep 4:5 */
+
 .grid-gallery.ar-mixed .grid-item.landscape { grid-column: span 3; }
+.grid-gallery.ar-mixed .grid-item.landscape .media { aspect-ratio: 6 / 5; } /* matches portrait height */
 
-.grid-gallery.ar-mixed .grid-item .media {
-  height: var(--media-h);      /* ← forces identical height */
-  aspect-ratio: auto;          /* ignore ratio on desktop */
-  overflow: hidden;
-  border-radius: 12px;
-  background: var(--bars-bg);
-}
-
+/* ensure images actually fill their boxes */
 .grid-gallery.ar-mixed .grid-item .media img {
-  display: block;              /* kill baseline gap */
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;           /* fill without distortion */
-  object-position: center;
+  object-fit: cover;
 }
 
 /* Mobile: keep consistent 4:5 and 1 column */
