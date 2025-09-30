@@ -207,40 +207,33 @@ aspect-ratio: auto;   /* drop fixed 4:5 ratio */
   }
 }
 	
-/* Mixed aspect-ratio layout: 2+2+3 units = 7 units per row */
+/* --- Equal media height on desktop --- */
 .grid-gallery.ar-mixed {
-  display: grid;
+  --media-h: 520px;            /* tweak this once to taste */
   grid-template-columns: repeat(7, 1fr);
-  gap: var(--gap); /* keep your existing gap */
+  align-items: start;
 }
 
-/* Default portrait cards: span 2, 4:5 */
 .grid-gallery.ar-mixed .grid-item { grid-column: span 2; }
-.grid-gallery.ar-mixed .grid-item .media { aspect-ratio: 4 / 5; }
-
-/* Landscape card: span 3, use 6:5 so HEIGHT matches portraits exactly */
 .grid-gallery.ar-mixed .grid-item.landscape { grid-column: span 3; }
-	
-/* Ensure images fill their boxes consistently */
+
+.grid-gallery.ar-mixed .grid-item .media {
+  height: var(--media-h);      /* ← forces identical height */
+  aspect-ratio: auto;          /* ignore ratio on desktop */
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bars-bg);
+}
+
 .grid-gallery.ar-mixed .grid-item .media img {
+  display: block;              /* kill baseline gap */
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;           /* fill without distortion */
+  object-position: center;
 }
 
-/* Put this AFTER your current ar-mixed rules */
-.grid-gallery.ar-mixed .grid-item.landscape .media {
-  aspect-ratio: auto;  /* ignore ratio */
-  height: 100%;        /* fill the row height exactly */
-}
-.grid-gallery.ar-mixed .grid-item.landscape .media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;   /* or 'contain' if you prefer no crop */
-}
-
-	
-/* (Mobile stays 1 column – keep them all 4/5 if you want consistency) */
+/* Mobile: keep consistent 4:5 and 1 column */
 @media (max-width: 768px) {
   .grid-gallery.ar-mixed {
     grid-template-columns: 1fr;
@@ -249,8 +242,8 @@ aspect-ratio: auto;   /* drop fixed 4:5 ratio */
   .grid-gallery.ar-mixed .grid-item.landscape {
     grid-column: auto;
   }
-  .grid-gallery.ar-mixed .grid-item .media,
-  .grid-gallery.ar-mixed .grid-item.landscape .media {
+  .grid-gallery.ar-mixed .grid-item .media {
+    height: auto;
     aspect-ratio: 4 / 5;
   }
 }
