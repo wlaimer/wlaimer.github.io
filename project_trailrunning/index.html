@@ -8,7 +8,7 @@
 <!-- Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
 <!-- Favicon -->
-<link rel="icon" href="/media/laimer_favicon_01.png" type="image/x-icon">
+<link rel="icon" href="/media/laimer_favicon_01.png" type="image/png">
 
 <style>
   body {
@@ -67,7 +67,7 @@
   .project-caption { font-size: 9pt; margin-top: auto; margin-bottom: 30px; max-width: 300px; }
 
 main {
-  padding-bottom: 200px;  /* creates white space after your content */
+  padding-bottom: 100px;  /* creates white space after your content */
 }
 	
 .project-nav {
@@ -137,6 +137,75 @@ a:visited { color: #000; }
 .brand { color:#000; transition: color .2s ease; }
 .brand:hover { color: rgba(0,0,0,.6); }
 
+/* --- Flexible project grid --- */
+.grid-gallery {
+  /* tweak per section via inline style or modifier class */
+  --cols: 3;                 /* default columns */
+  --gap: 20px;               /* gap between cards */
+  --maxw: 100%;            /* total grid width (matches your page) */
+  --object-fit: cover;
+ --bars-bg: #f0f0f0;
+
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gap);
+  max-width: var(--maxw);
+  margin: 120px auto 120px;         /* centers the grid */
+  padding: 0 20px;           /* align with page padding */
+}
+
+.grid-gallery.cols-3 { --cols: 3; }
+.grid-gallery.cols-4 { --cols: 4; }
+
+/* single card */
+.grid-item { display: flex; flex-direction: column; }
+
+/* 4:5 portrait media */
+.grid-item .media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;       /* keeps strict portrait ratio */
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bars-bg);   /* the grey bars fill */
+
+}
+.grid-item .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--object-fit);
+  object-position: center center; /* always centered */
+}
+
+/* caption under image, left-aligned */
+.grid-item .caption {
+  font-size: 8pt;            /* matches your small text */
+  line-height: 1.5;
+  margin-top: 20px;
+  max-width: 46ch;           /* comfy line-length; remove if not needed */
+  color: #000;
+  text-align: left;
+}
+
+/* UTILITIES */
+/* Per-image: force no-crop, show full image with grey bars */
+.fit-contain { --object-fit: contain; }
+
+/* Per-grid: make every image in this grid use contain */
+.grid-gallery.contain-all { --object-fit: contain; }
+	
+/* phone: 1 column, full-width image, caption under it */
+@media (max-width: 768px) {
+  .grid-gallery,
+  .grid-gallery.cols-3,
+  .grid-gallery.cols-4 {
+    --cols: 1;
+    gap: 16px;
+    padding: 0 16px; /* keep your mobile padding */
+  }
+}
+
+	
 /* Ensure nav + footer lists don't lock color on hover */
 .links a,
 .project-links a {
@@ -148,6 +217,30 @@ a:visited { color: #000; }
 .project-links a:hover {
   color: rgba(0,0,0,.6);
 }
+
+/* simple lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;              /* hidden by default */
+  place-items: center;        /* centers the image */
+  background: rgba(0,0,0,.85);
+  padding: 24px;
+  z-index: 2000;              /* above header */
+}
+.lightbox.open { display: grid; }
+
+.lightbox img {
+  max-width: min(96vw, 1600px);
+  max-height: 90vh;
+  border-radius: 12px;        /* matches your cards */
+  background: #fff;           /* for transparent PNG/SVG */
+  object-fit: contain;
+}
+
+/* prevent page scroll when open */
+body.noscroll { overflow: hidden; }
+	
 </style>
 </head>
 <body>
@@ -177,8 +270,68 @@ a:visited { color: #000; }
           In addition to my work as a designer, I am a passionate ultra-trail runner and alpinist. Time outdoors sharpens my focus and influences my design work.
         </h2>
       </div>
+ <!-- keep the caption + meta below -->
+      <p class="project-caption">
+        Personal project<br>
+        Duration: open-ended<br><br>
+       Salzträger (112km 7000vm), Hochkönigman (88km 5300vm) Dreifaltigkeit (81km 7600vm), Traunsee Bergmarathon (63km 4500vm), Mont Blanc (Cosmiques-Route), Dufourspitze (Winter & Summer), Weisshorn, Zinalrothorn (Rothorngrat), Piz Bernina (Biancograt), Liskamm, Nadelgrat
+      </p>
     </div>
   </section>
+		<section class="project-content">
+<div class="grid-gallery cols-4 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_trailrunning_02.jpg" alt="Concept 01">
+      </div>
+      <p class="caption">
+       Bergwelten | 2023<br>
+		  <br>
+As a mountain runner, I was part of Bergwelten on ServusTV, a popular mountain adventure documentary series.<br>
+	  <br>
+		  Red Bull Media House <br>
+www.servustv.com/natur/v/aaud9mjrx1wrnykjhwf8
+	  </p>
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_trailrunning_03.jpg" alt="Concept 02">
+      </div>
+      <p class="caption">
+       Dreifaltigkeit | 2020<br>
+		  <br>
+Solo self-supported ultra-trail run covering 81 km with 7,600 m of elevation gain. An article was published in the Kronen Zeitung, Austria’s largest newspaper.<br>
+	  <br>
+		 Kronen Zeitung<br>
+www.krone.at/2249338
+	  </p>
+	</article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_trailrunning_04.jpg" alt="Concept 03">
+      </div>
+      <p class="caption">
+        32 Summits | 2019<br>
+		  <br>
+A self-supported ultra-trail run, with a good friend, covering 46 km and 5,500 m of elevation gain.<br>
+	  <br>
+		  Bezirksblatt Tennengau<br>
+www.meinbezirk.at/tennengau/c-lokales/scheffauer-alpinisten-erklimmen-32-gipfel-des-tennengebirges-in-17-stunden_a3648402
+	  </p>
+	</article>
+	  
+<article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_trailrunning_05.jpg" alt="Concept 04">
+      </div>
+      <p class="caption">
+        Instagram Trail Running & Alpinism<br>
+		  <br>
+www.instagram.com/_woifei</p>
+	</article>
+</div>
 </main>
 
 
@@ -201,5 +354,52 @@ a:visited { color: #000; }
     <a href="/project_trailrunning/" class="active">Ultra Trail</a>
   </nav>
 </footer>
+				<!-- minimal lightbox root -->
+<div class="lightbox" id="lb"><img alt=""></div>
+	<script>
+(() => {
+  const overlay = document.getElementById('lb');
+  const bigImg  = overlay.querySelector('img');
+  const desktop = window.matchMedia('(min-width: 769px)');
+
+  function bindDesktopZoom() {
+    // Only grids you mark as .zoomable will have this behavior
+    document.querySelectorAll('.grid-gallery.zoomable .media img').forEach(img => {
+      if (img.dataset._zoomBound) return;     // avoid double-binding
+      img.dataset._zoomBound = '1';
+      img.addEventListener('click', () => {
+        if (!desktop.matches) return;         // disabled on phone
+        bigImg.src = img.dataset.full || img.currentSrc || img.src;
+        overlay.classList.add('open');
+        document.body.classList.add('noscroll');
+      });
+    });
+  }
+
+  // Close when clicking outside the image (the backdrop)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      document.body.classList.remove('noscroll');
+      bigImg.src = '';
+    }
+  });
+
+  // Optional: Esc to close (desktop)
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      overlay.click();
+    }
+  });
+
+  // Initial bind + rebind on resize breakpoint changes
+  bindDesktopZoom();
+  desktop.addEventListener('change', () => {
+    // Nothing to do on shrink; clicks won’t open when not matching
+    // On grow to desktop, ensure any new images are bound
+    if (desktop.matches) bindDesktopZoom();
+  });
+})();
+</script>
 </body>
 </html>
