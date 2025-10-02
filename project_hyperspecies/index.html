@@ -177,6 +177,17 @@ a:visited { color: #000; }
   object-position: center center; /* always centered */
 }
 
+	/* Make videos/iframes behave like images inside .media */
+.grid-item .media video,
+.grid-item .media iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--object-fit);   /* default cover; can be overridden */
+  object-position: center center;
+  display: block;                  /* avoid baseline whitespace */
+  border: 0;
+}
+	
 /* caption under image, left-aligned */
 .grid-item .caption {
   font-size: 8pt;            /* matches your small text */
@@ -280,7 +291,8 @@ Exploring futures of becoming, beyond human. A framework for projects that blend
     </div>
   </section>
 <section class="project-content">
-<div class="grid-gallery cols-3 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+
+	<div class="grid-gallery cols-3 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
     <article class="grid-item">
   <div class="media">
     <video autoplay loop muted playsinline>
