@@ -8,7 +8,7 @@
 <!-- Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
 <!-- Favicon -->
-<link rel="icon" href="/media/laimer_favicon_01.png" type="image/x-icon">
+<link rel="icon" href="/media/laimer_favicon_01.png" type="image/png">
 
 <style>
   body {
@@ -67,7 +67,7 @@
   .project-caption { font-size: 9pt; margin-top: auto; margin-bottom: 30px; max-width: 300px; }
 
 main {
-  padding-bottom: 200px;  /* creates white space after your content */
+  padding-bottom: 100px;  /* creates white space after your content */
 }
 	
 .project-nav {
@@ -137,6 +137,79 @@ a:visited { color: #000; }
 .brand { color:#000; transition: color .2s ease; }
 .brand:hover { color: rgba(0,0,0,.6); }
 
+/* --- Flexible project grid --- */
+.grid-gallery {
+  /* tweak per section via inline style or modifier class */
+  --cols: 3;                 /* default columns */
+  --gap: 20px;               /* gap between cards */
+  --maxw: 100%;            /* total grid width (matches your page) */
+  --object-fit: cover;
+ --bars-bg: #f0f0f0;
+
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gap);
+  max-width: var(--maxw);
+  margin: 120px auto 120px;         /* centers the grid */
+  padding: 0 20px;           /* align with page padding */
+}
+
+.grid-gallery.cols-3 { --cols: 3; }
+.grid-gallery.cols-4 { --cols: 4; }
+
+/* single card */
+.grid-item { display: flex; flex-direction: column; }
+
+/* put this AFTER the original, or replace it */
+.grid-item .media { 
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ar, 4 / 5);  /* <- use the variable */
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bars-bg);
+}
+
+/* make selected cards square (or any ratio) */
+.media.square { --ar: 1 / 1; }      /* 1:1 */
+.media.fivetofour { --ar: 5 / 4; }  /* 5:4 if you really want that */
+	
+.grid-item .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--object-fit);
+  object-position: center center; /* always centered */
+}
+
+/* caption under image, left-aligned */
+.grid-item .caption {
+  font-size: 8pt;            /* matches your small text */
+  line-height: 1.5;
+  margin-top: 20px;
+  max-width: 46ch;           /* comfy line-length; remove if not needed */
+  color: #000;
+  text-align: left;
+}
+
+/* UTILITIES */
+/* Per-image: force no-crop, show full image with grey bars */
+.fit-contain { --object-fit: contain; }
+
+/* Per-grid: make every image in this grid use contain */
+.grid-gallery.contain-all { --object-fit: contain; }
+	
+/* phone: 1 column, full-width image, caption under it */
+@media (max-width: 768px) {
+  .grid-gallery,
+  .grid-gallery.cols-3,
+  .grid-gallery.cols-4 {
+    --cols: 1;
+    gap: 16px;
+    padding: 0 16px; /* keep your mobile padding */
+  }
+}
+
+	
 /* Ensure nav + footer lists don't lock color on hover */
 .links a,
 .project-links a {
@@ -148,6 +221,30 @@ a:visited { color: #000; }
 .project-links a:hover {
   color: rgba(0,0,0,.6);
 }
+
+/* simple lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;              /* hidden by default */
+  place-items: center;        /* centers the image */
+  background: rgba(0,0,0,.85);
+  padding: 24px;
+  z-index: 2000;              /* above header */
+}
+.lightbox.open { display: grid; }
+
+.lightbox img {
+  max-width: min(96vw, 1600px);
+  max-height: 90vh;
+  border-radius: 12px;        /* matches your cards */
+  background: #fff;           /* for transparent PNG/SVG */
+  object-fit: contain;
+}
+
+/* prevent page scroll when open */
+body.noscroll { overflow: hidden; }
+	
 </style>
 </head>
 <body>
@@ -187,11 +284,133 @@ a:visited { color: #000; }
       </p>
     </div>
   </section>
-</main>
+<section class="project-content">
 
+<div class="grid-gallery cols-3 contain-all zoomable" style="--maxw:1200px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media fivetofour">
+        <img src="/media/laimer_tensoralamp_02.jpg" alt="Concept 01">
+      </div>
+      <p class="caption">
+       Historical Research<br>
+		  <br>
+	Artificial lighting has evolved from oil lamps to electric lamps, reshaping how people work beyond daylight.<br>
+<br>
+This project builds on that history by blending functional and ambient lighting in a modern lamp.</p>
+    </article>
 
+    <article class="grid-item">
+      <div class="media fivetofour">
+        <img src="/media/laimer_tensoralamp_03.jpg" alt="Concept 02">
+      </div>
+      <p class="caption">
+       Market Analysis<br>
+		  <br>
+	The lighting market is filled with diverse, user-friendly designs thanks to new technologies.<br>
+<br>
+This project aims to create a distinctive, adaptable office lamp that stands out in both design and functionality.</p>
+    </article>
+
+    <article class="grid-item">
+      <div class="media fivetofour">
+        <img src="/media/laimer_tensoralamp_04.jpg" alt="Concept 03">
+      </div>
+      <p class="caption">
+        Designing for Adaptive Futures<br>
+		  <br>
+	How can an office floor lamp effectively combine direct and indirect lighting through shape change? What ensures a smooth transitions between lighting modes? In what ways does shape influence light distribution? How does modularity contribute to an extended lifespan?</p>
+	</article>
 </div>
-  </section>
+	
+<div class="grid-gallery cols-4 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_05.jpg" alt="Concept 01">
+      </div>
+      <p class="caption">
+       Construction<br>
+		  <br>
+Key technical components: Bent stainless steel and biodegradable plastic, as well as a membrane made of stretchable fabric and integrated LED.</p>
+    </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_06.jpg" alt="Concept 02">
+      </div>
+      <p class="caption">
+        Amient Light<br>
+		  <br>
+When used as a mood light, the light cylinder is positioned in the upper part and directs the light upwards to create a calm, atmospheric light.</p>
+    </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_07.jpg" alt="Concept 03">
+      </div>
+      <p class="caption">
+        Work Light<br>
+		  <br>
+The position of the cylinder can be adjusted by pulling the cord, relaxing the upper and tensioning the lower part; this turns indirect into direct lighting.</p>
+    </article>
+	  
+<article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_08.jpg" alt="Concept 04">
+      </div>
+      <p class="caption">
+        Final Version<br>
+		  <br>
+The target audience is office workers who need versatile lighting. Its unique design and flexibility make this floor lamp a standout feature in any office.</p>
+    </article>
+</div>
+<div class="grid-gallery cols-4 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_09.jpg" alt="Concept 01">
+      </div>
+  </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_10.jpg" alt="Concept 02">
+      </div>
+     </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_11.jpg" alt="Concept 03">
+      </div>
+    </article>
+	  
+<article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_12.jpg" alt="Concept 04">
+      </div>
+    </article>
+</div>
+<div class="grid-gallery cols-3 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_13.jpg" alt="Concept 01">
+      </div>
+  </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_14.jpg" alt="Concept 02">
+      </div>
+     </article>
+
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_tensoralamp_15.jpg" alt="Concept 03">
+      </div>
+    </article>
+</div>
+	
+	
+	  </section>	
+</main>
 	<footer class="project-nav">
   <nav class="project-links">
     <a href="/project_onrunning/">On Running</a>
@@ -209,5 +428,52 @@ a:visited { color: #000; }
     <a href="/project_trailrunning/">Ultra Trail</a>
   </nav>
 </footer>
+			<!-- minimal lightbox root -->
+<div class="lightbox" id="lb"><img alt=""></div>
+	<script>
+(() => {
+  const overlay = document.getElementById('lb');
+  const bigImg  = overlay.querySelector('img');
+  const desktop = window.matchMedia('(min-width: 769px)');
+
+  function bindDesktopZoom() {
+    // Only grids you mark as .zoomable will have this behavior
+    document.querySelectorAll('.grid-gallery.zoomable .media img').forEach(img => {
+      if (img.dataset._zoomBound) return;     // avoid double-binding
+      img.dataset._zoomBound = '1';
+      img.addEventListener('click', () => {
+        if (!desktop.matches) return;         // disabled on phone
+        bigImg.src = img.dataset.full || img.currentSrc || img.src;
+        overlay.classList.add('open');
+        document.body.classList.add('noscroll');
+      });
+    });
+  }
+
+  // Close when clicking outside the image (the backdrop)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      document.body.classList.remove('noscroll');
+      bigImg.src = '';
+    }
+  });
+
+  // Optional: Esc to close (desktop)
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      overlay.click();
+    }
+  });
+
+  // Initial bind + rebind on resize breakpoint changes
+  bindDesktopZoom();
+  desktop.addEventListener('change', () => {
+    // Nothing to do on shrink; clicks won’t open when not matching
+    // On grow to desktop, ensure any new images are bound
+    if (desktop.matches) bindDesktopZoom();
+  });
+})();
+</script>
 </body>
 </html>
