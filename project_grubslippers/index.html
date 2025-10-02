@@ -155,6 +155,8 @@ a:visited { color: #000; }
   padding: 0 20px;           /* align with page padding */
 }
 
+.grid-gallery.cols-1 { --cols: 1; }
+.grid-gallery.cols-2 { --cols: 2; }
 .grid-gallery.cols-3 { --cols: 3; }
 .grid-gallery.cols-4 { --cols: 4; }
 
@@ -199,6 +201,7 @@ aspect-ratio: auto;   /* drop fixed 4:5 ratio */
 /* phone: 1 column, full-width image, caption under it */
 @media (max-width: 768px) {
   .grid-gallery,
+.grid-gallery.cols-2,
   .grid-gallery.cols-3,
   .grid-gallery.cols-4 {
     --cols: 1;
