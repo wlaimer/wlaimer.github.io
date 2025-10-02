@@ -161,17 +161,19 @@ a:visited { color: #000; }
 /* single card */
 .grid-item { display: flex; flex-direction: column; }
 
-/* 4:5 portrait media */
-.grid-item .media {
+/* put this AFTER the original, or replace it */
+.grid-item .media { 
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;       /* keeps strict portrait ratio */
+  aspect-ratio: var(--ar, 4 / 5);  /* <- use the variable */
   overflow: hidden;
   border-radius: 12px;
-  background: var(--bars-bg);   /* the grey bars fill */
+  background: var(--bars-bg);
 }
-	
-.media.fivetofour { --ar: 5 / 4; }
+
+/* make selected cards square (or any ratio) */
+.media.square { --ar: 1 / 1; }      /* 1:1 */
+.media.fivetofour { --ar: 5 / 4; }  /* 5:4 if you really want that */
 	
 .grid-item .media img {
   width: 100%;
