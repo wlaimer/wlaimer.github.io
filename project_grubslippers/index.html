@@ -171,6 +171,7 @@ a:visited { color: #000; }
   overflow: hidden;
   border-radius: 12px;
   background: var(--bars-bg);   /* the grey bars fill */
+	}
 	
 .grid-item .media img {
   width: 100%;
@@ -230,11 +231,6 @@ a:visited { color: #000; }
   object-fit: cover;
 }
 
-	/* Put this AFTER your existing generic .grid-item .media rule */
-.grid-gallery.ar-mixed .grid-item .media {
-  height: auto !important;        /* stop the stretch */
-  aspect-ratio: 4 / 5 !important; /* portraits keep 4:5 */
-}
 	
 /* Mobile: keep consistent 4:5 and 1 column */
 @media (max-width: 768px) {
