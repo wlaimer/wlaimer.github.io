@@ -209,42 +209,65 @@ a:visited { color: #000; }
     padding: 0 16px; /* keep your mobile padding */
   }
 }
-	
+/* === Simple "2 portraits + 1 flexible landscape" row (no 7-col grid) === */
 .grid-gallery.ar-mixed {
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  /* keep your existing gap */
+  display: flex;                 /* row layout */
+  gap: var(--gap);
+  max-width: var(--maxw);
+  margin: 120px auto;            /* keep your spacing */
+  padding: 0 20px;               /* match page padding */
+  align-items: stretch;          /* equal card heights by tallest media */
 }
 
-.grid-gallery.ar-mixed .grid-item { grid-column: span 2; }
-.grid-gallery.ar-mixed .grid-item .media { aspect-ratio: 4 / 5; }   /* portraits keep 4:5 */
+/* cards stack content vertically (media then caption) */
+.grid-gallery.ar-mixed .grid-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;                  /* avoid overflow from long captions */
+}
 
-.grid-gallery.ar-mixed .grid-item.landscape { grid-column: span 3; }
+/* two portraits: fixed basis; they set the row height via 4:5 aspect */
+.grid-gallery.ar-mixed .grid-item:not(.landscape) {
+  flex: 0 0 28%;                 /* ~28% + 28% + gap leaves room for landscape */
+}
+
+/* landscape: takes whatever width is left */
+.grid-gallery.ar-mixed .grid-item.landscape {
+  flex: 1 1 auto;                /* flexible, fills remaining space */
+}
+
+/* portraits: keep strict 4:5 media boxes */
+.grid-gallery.ar-mixed .grid-item:not(.landscape) .media {
+  aspect-ratio: 4 / 5;
+}
+
+/* landscape: drop ratio; match the portraits' exact row height */
 .grid-gallery.ar-mixed .grid-item.landscape .media {
-  aspect-ratio: 6 / 5 !important; /* 1.2 — matches 2 tracks @ 4:5 vs 3 tracks */
-	  height: calc(100% - 10px); /* force it 1px shorter */
+  aspect-ratio: auto;            /* unlock ratio */
+  height: 100%;                  /* stretch to the row height */
 }
 
-/* ensure images actually fill their boxes */
+/* always fill media boxes */
 .grid-gallery.ar-mixed .grid-item .media img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-	
-/* Mobile: keep consistent 4:5 and 1 column */
+/* --- Mobile: one column, all 4:5 for consistency --- */
 @media (max-width: 768px) {
   .grid-gallery.ar-mixed {
-    grid-template-columns: 1fr;
+    display: block;              /* stack */
+    gap: 0;                      /* gaps handled by margins below */
+    padding: 0 16px;
+    margin: 20px 0;
   }
-  .grid-gallery.ar-mixed .grid-item,
-  .grid-gallery.ar-mixed .grid-item.landscape {
-    grid-column: auto;
+  .grid-gallery.ar-mixed .grid-item {
+    margin-bottom: 16px;
   }
   .grid-gallery.ar-mixed .grid-item .media {
     height: auto;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 5;         /* portraits & landscape alike on mobile */
   }
 }
 
