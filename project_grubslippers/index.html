@@ -163,6 +163,15 @@ a:visited { color: #000; }
 /* single card */
 .grid-item { display: flex; flex-direction: column; }
 
+/* 4:5 portrait media */
+.grid-item .media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;       /* keeps strict portrait ratio */
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bars-bg);   /* the grey bars fill */
+	
 .grid-item .media img {
   width: 100%;
   height: 100%;
