@@ -209,65 +209,64 @@ a:visited { color: #000; }
     padding: 0 16px; /* keep your mobile padding */
   }
 }
-/* === Simple "2 portraits + 1 flexible landscape" row (no 7-col grid) === */
+
+/* === Simple 3-column grid: 2 portraits + 1 flexible landscape === */
 .grid-gallery.ar-mixed {
-  display: flex;                 /* row layout */
+  display: grid;
+  grid-template-columns: minmax(220px, 28%) minmax(220px, 28%) 1fr;
   gap: var(--gap);
   max-width: var(--maxw);
-  margin: 120px auto;            /* keep your spacing */
-  padding: 0 20px;               /* match page padding */
-  align-items: stretch;          /* equal card heights by tallest media */
+  margin: 120px auto;
+  padding: 0 20px;
+  align-items: stretch;            /* all three cards same row height */
 }
 
-/* cards stack content vertically (media then caption) */
+/* each card: stack media then caption */
 .grid-gallery.ar-mixed .grid-item {
   display: flex;
   flex-direction: column;
-  min-width: 0;                  /* avoid overflow from long captions */
+  min-width: 0;
 }
 
-/* two portraits: fixed basis; they set the row height via 4:5 aspect */
-.grid-gallery.ar-mixed .grid-item:not(.landscape) {
-  flex: 0 0 28%;                 /* ~28% + 28% + gap leaves room for landscape */
-}
-
-/* landscape: takes whatever width is left */
-.grid-gallery.ar-mixed .grid-item.landscape {
-  flex: 1 1 auto;                /* flexible, fills remaining space */
-}
-
-/* portraits: keep strict 4:5 media boxes */
+/* PORTRAITS: set row height via 4:5 aspect */
 .grid-gallery.ar-mixed .grid-item:not(.landscape) .media {
   aspect-ratio: 4 / 5;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bars-bg);
 }
 
-/* landscape: drop ratio; match the portraits' exact row height */
+/* LANDSCAPE: drop ratio and fill the row height */
 .grid-gallery.ar-mixed .grid-item.landscape .media {
-  aspect-ratio: auto;            /* unlock ratio */
-  height: 100%;                  /* stretch to the row height */
+  aspect-ratio: auto;              /* unlock ratio */
+  height: 100%;                    /* fill the row height exactly */
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bars-bg);
 }
 
-/* always fill media boxes */
+/* images fill their boxes */
 .grid-gallery.ar-mixed .grid-item .media img {
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
+  object-position: center;
 }
 
-/* --- Mobile: one column, all 4:5 for consistency --- */
+/* --- Mobile: single column, all 4:5 --- */
 @media (max-width: 768px) {
   .grid-gallery.ar-mixed {
-    display: block;              /* stack */
-    gap: 0;                      /* gaps handled by margins below */
+    grid-template-columns: 1fr;
+    gap: 16px;
     padding: 0 16px;
     margin: 20px 0;
   }
-  .grid-gallery.ar-mixed .grid-item {
-    margin-bottom: 16px;
-  }
   .grid-gallery.ar-mixed .grid-item .media {
     height: auto;
-    aspect-ratio: 4 / 5;         /* portraits & landscape alike on mobile */
+    aspect-ratio: 4 / 5;          /* portrait & landscape alike on mobile */
   }
 }
 
