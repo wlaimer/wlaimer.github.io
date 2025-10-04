@@ -238,9 +238,9 @@ a:visited { color: #000; }
 }
 
 .grid-gallery.ar-mixed .grid-item.landscape .media {
-  aspect-ratio: 6 / 5; /* EXACT match to two 4:5 portraits across */
+  aspect-ratio: calc(6 / 5 + 0.0020); /* try 0.0010–0.0030 */
 }
-
+	
 /* images fill boxes */
 .grid-gallery.ar-mixed .grid-item .media img {
   width: 100%;
