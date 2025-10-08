@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>wolfgang laimer - ftw concepts</title>
+
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+<!-- Favicon -->
+<link rel="icon" href="/media/laimer_favicon_01.png" type="image/png">
+
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 9pt;
+    line-height: 1.6;
+    background: #fff;
+    color: #000;
+    margin: 0;
+  }
+	html {
+ 	 overflow-y: scroll; /* always show vertical scrollbar */
+	}
+		/* Selection style inside about page */
+::selection {
+  background: #000;   /* black background */
+  color: #fff;        /* white text */
+}
+  /* Navigation */
+  .nav {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1000;
+    padding: 0 80px 0 50px;
+  }
+  .nav-inner { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+  .brand { font-weight: 800; font-size: 11pt; text-transform: uppercase; line-height: 1.2; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .links { display: flex; gap: 20px; }
+  .links a { text-decoration: none; color: #000; font-size: 9pt; font-weight: normal; }
+  .links a.active { font-weight: bold; }
+
+  /* ---- DESKTOP / DEFAULT ---- */
+  .project-hero {
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+  .project-hero img {
+    width: 50%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  .project-info { flex: 1; display: flex; flex-direction: column; }
+  .info-top { margin-top: 80px; }
+  .project-info h1 { font-size: 30pt; margin: 0; line-height: 0.9; }
+  .project-info h2 { font-size: 15pt; margin: 10px 0 0; max-width: 450px; line-height: 1.3; }
+  .project-caption { font-size: 9pt; margin-top: auto; margin-bottom: 30px; max-width: 300px; }
+
+main {
+  padding-bottom: 100px;  /* creates white space after your content */
+}
+	
+.project-nav {
+  padding: 10px 20px;
+  margin-top: 60px;
+  text-align: center;
+  background: #fff;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;        /* allow wrapping on small screens */
+  justify-content: center;
+  gap: 16px;              /* spacing between links */
+}
+
+.project-links a {
+  text-decoration: none;
+  color: #000;
+  font-size: 8pt;         /* same as "About" in the header */
+  font-weight: normal;
+}
+
+.project-links a.active {
+  font-weight: bold;
+}
+
+  /* ---- MOBILE ONLY ---- */
+@media (max-width: 768px) {
+	  .nav {
+    padding: 0 16px; /* slimmer nav padding on phones */
+  }
+	.project-hero {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 16px;
+    margin: 20px 0;
+  }
+
+  /* Reihenfolge innerhalb des Info-Blocks */
+  .project-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-top { order: 1; margin-top: 20px; }
+  .project-info h2 { order: 2; margin-bottom: 20px; }
+  .project-caption { order: 3; }
+
+  /* Bild ganz ans Ende */
+  .project-hero img { order: 4; width: 100%; }
+
+  /* Typografie-Anpassungen */
+  .project-info h1 { font-size: 20pt; }
+  .project-info h2 { font-size: 12pt; max-width: 100%; }
+  .project-caption { font-size: 8pt; margin-bottom: 20px; }
+}
+/* --- Link fade (site-wide) — place LAST --- */
+a {
+  color: #000;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+a:hover { color: rgba(0,0,0,.6); }
+a:visited { color: #000; }
+
+/* Brand fades too */
+.brand { color:#000; transition: color .2s ease; }
+.brand:hover { color: rgba(0,0,0,.6); }
+
+/* --- Flexible project grid --- */
+.grid-gallery {
+  /* tweak per section via inline style or modifier class */
+  --cols: 3;                 /* default columns */
+  --gap: 20px;               /* gap between cards */
+  --maxw: 100%;            /* total grid width (matches your page) */
+  --object-fit: cover;
+ --bars-bg: #f0f0f0;
+
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: var(--gap);
+  max-width: var(--maxw);
+  margin: 120px auto 120px;         /* centers the grid */
+  padding: 0 20px;           /* align with page padding */
+}
+
+.grid-gallery.cols-3 { --cols: 3; }
+.grid-gallery.cols-4 { --cols: 4; }
+
+/* single card */
+.grid-item { display: flex; flex-direction: column; }
+
+/* 4:5 portrait media */
+.grid-item .media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;       /* keeps strict portrait ratio */
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bars-bg);   /* the grey bars fill */
+
+}
+.grid-item .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--object-fit);
+  object-position: center center; /* always centered */
+}
+
+/* caption under image, left-aligned */
+.grid-item .caption {
+  font-size: 8pt;            /* matches your small text */
+  line-height: 1.5;
+  margin-top: 20px;
+  max-width: 46ch;           /* comfy line-length; remove if not needed */
+  color: #000;
+  text-align: left;
+}
+
+/* UTILITIES */
+/* Per-image: force no-crop, show full image with grey bars */
+.fit-contain { --object-fit: contain; }
+
+/* Per-grid: make every image in this grid use contain */
+.grid-gallery.contain-all { --object-fit: contain; }
+	
+/* phone: 1 column, full-width image, caption under it */
+@media (max-width: 768px) {
+  .grid-gallery,
+  .grid-gallery.cols-3,
+  .grid-gallery.cols-4 {
+    --cols: 1;
+    gap: 16px;
+    padding: 0 16px; /* keep your mobile padding */
+  }
+}
+
+	
+/* Ensure nav + footer lists don't lock color on hover */
+.links a,
+.project-links a {
+  color:#000;
+  text-decoration:none;
+  transition: color .2s ease;
+}
+.links a:hover,
+.project-links a:hover {
+  color: rgba(0,0,0,.6);
+}
+
+/* simple lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;              /* hidden by default */
+  place-items: center;        /* centers the image */
+  background: rgba(0,0,0,.85);
+  padding: 24px;
+  z-index: 2000;              /* above header */
+}
+.lightbox.open { display: grid; }
+
+.lightbox img {
+  max-width: min(96vw, 1600px);
+  max-height: 90vh;
+  border-radius: 12px;        /* matches your cards */
+  background: #fff;           /* for transparent PNG/SVG */
+  object-fit: contain;
+}
+
+/* prevent page scroll when open */
+body.noscroll { overflow: hidden; }
+	
+</style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <div>WOLFGANG</div>
+        <div>LAIMER</div>
+      </a>
+	     <nav class="links">
+	  <a href="/" class="active">Work</a>
+	  <a href="/about">About</a>
+	</nav>
+    </div>
+  </header>
+
+	<main>
+  <!-- Project Hero -->
+  <section class="project-hero">
+    <img src="/media/laimer_wolfhaus_01.jpg" alt="Project hero image">
+    <div class="project-info">
+      <div class="info-top">
+        <h1>EXHIBITION<br>BOOTH</h1>
+        <br>
+        <h2>
+          This project for Wolf Haus includes modularity and areas for presentations and meetings. The layout ensures that information is easily accessible and attracts visual attention.
+        </h2>
+      </div>
+
+      <!-- keep the caption + meta below -->
+      <p class="project-caption">
+        2020<br>
+        Wolf System GmbH<br>
+        Duration: three months<br><br>
+        Analysis design language and core competencies, Client briefings and presentations, Focus on gaining attention and offering information, Scale model cardboard laser cut, 3D model and visualisations
+      </p>
+    </div>
+  </section>
+		<section class="project-content">
+<div class="grid-gallery cols-3 zoomable" style="--maxw:1600px; --bars-bg:#f0f0f0;">
+    <article class="grid-item">
+      <div class="media">
+        <img src="/media/laimer_wolfhaus_02.jpg" alt="Concept 01">
+      </div>
+    </article>
+
+    <article class="grid-item">
+      <div class="media">
+           <img src="/media/laimer_wolfhaus_03.jpg" alt="Concept 02">
+      </div>
+    </article>
+
+       <article class="grid-item">
+      <div class="media">
+           <img src="/media/laimer_wolfhaus_04.jpg" alt="Concept 03">
+      </div>
+    </article>
+    </div>
+</section>
+</main>
+	<footer class="project-nav">
+  <nav class="project-links">
+    <a href="/project_onrunning/">On Running</a>
+    <a href="/project_rapidautografting/">Rapid Autografting</a>
+    <a href="/project_atomic/">Atomic Ski</a>
+	<a href="/project_hyperspecies/">Hyper Species</a>
+    <a href="/project_heatandsweat/">Heat & Sweat</a>
+    <a href="/project_grubslippers/">Grub Slippers</a>
+    <a href="/project_flori/">Medication Trolley</a>
+    <a href="/project_hangercollapse/">Hanger Collapse</a>
+    <a href="/project_multiframe/">Ortovox Reframe</a>
+    <a href="/project_tensoralamp/">Tensora Lamp</a>
+    <a href="/project_wolfhaus/" class="active">Wolfhaus Booth</a>
+    <a href="/project_voglauer/">Voglauer Hotel</a>
+    <a href="/project_trailrunning/">Ultra Trail</a>
+  </nav>
+</footer>
+	<!-- minimal lightbox root -->
+<div class="lightbox" id="lb"><img alt=""></div>
+	<script>
+(() => {
+  const overlay = document.getElementById('lb');
+  const bigImg  = overlay.querySelector('img');
+  const desktop = window.matchMedia('(min-width: 769px)');
+
+  function bindDesktopZoom() {
+    // Only grids you mark as .zoomable will have this behavior
+    document.querySelectorAll('.grid-gallery.zoomable .media img').forEach(img => {
+      if (img.dataset._zoomBound) return;     // avoid double-binding
+      img.dataset._zoomBound = '1';
+      img.addEventListener('click', () => {
+        if (!desktop.matches) return;         // disabled on phone
+        bigImg.src = img.dataset.full || img.currentSrc || img.src;
+        overlay.classList.add('open');
+        document.body.classList.add('noscroll');
+      });
+    });
+  }
+
+  // Close when clicking outside the image (the backdrop)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      document.body.classList.remove('noscroll');
+      bigImg.src = '';
+    }
+  });
+
+  // Optional: Esc to close (desktop)
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      overlay.click();
+    }
+  });
+
+  // Initial bind + rebind on resize breakpoint changes
+  bindDesktopZoom();
+  desktop.addEventListener('change', () => {
+    // Nothing to do on shrink; clicks won’t open when not matching
+    // On grow to desktop, ensure any new images are bound
+    if (desktop.matches) bindDesktopZoom();
+  });
+})();
+</script>
+</body>
+</html>
