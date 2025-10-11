@@ -69,6 +69,17 @@
 main {
   padding-bottom: 100px;  /* creates white space after your content */
 }
+
+		/* Make videos/iframes behave like images inside .media */
+.grid-item .media video,
+.grid-item .media iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--object-fit);   /* default cover; can be overridden */
+  object-position: center center;
+  display: block;                  /* avoid baseline whitespace */
+  border: 0;
+}
 	
 .project-nav {
   padding: 10px 20px;
